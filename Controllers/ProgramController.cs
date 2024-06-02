@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RehabilitationSystem.Repository;
 using RehabilitationSystem.Interfaces;
+using RehabilitationSystem.ViewModels.Program;
 
 namespace RehabilitationSystem.Controllers
 {
@@ -18,12 +19,12 @@ namespace RehabilitationSystem.Controllers
             _program = program;
         }
         // GET: ProgramController
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-/*            ProgramQuery query = new ProgramQuery() { };
-            List<string> includes = new List<string> { " " };
-            List<GetProgram> ProgramVM = await _program.GetAllAsync(query, includes);*/
-            return View();
+            ProgramQuery query = new ProgramQuery() { };
+            List<string> includes = new List<string> { "Sessions" };
+            List<GetProgram> ProgramVM = await _program.GetAllAsync(query, includes);
+            return View(ProgramVM);
         }
 
         // GET: ProgramController/Details/5

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RehabilitationSystem.Models;
 using System.Diagnostics;
 
 namespace RehabilitationSystem.Controllers

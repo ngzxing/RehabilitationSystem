@@ -265,6 +265,7 @@ C:\Users\User\Desktop\groupProject\RehabilitationSystem\obj\Debug\net8.0\Rehabil
 C:\Users\User\Desktop\groupProject\RehabilitationSystem\obj\Debug\net8.0\RehabilitationSystem.genruntimeconfig.cache
 C:\Users\User\Desktop\groupProject\RehabilitationSystem\obj\Debug\net8.0\ref\RehabilitationSystem.dll
 C:\Users\User\Desktop\groupProject\RehabilitationSystem\bin\Debug\net8.0\AutoMapper.dll
+<<<<<<< HEAD
 C:\Users\USER\Desktop\RehabilitationSystem\RehabilitationSystem\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\USER\Desktop\RehabilitationSystem\RehabilitationSystem\bin\Debug\net8.0\appsettings.json
 C:\Users\USER\Desktop\RehabilitationSystem\RehabilitationSystem\bin\Debug\net8.0\RehabilitationSystem.staticwebassets.runtime.json
@@ -533,3 +534,6 @@ C:\Users\USER\Desktop\RehabilitationSystem\RehabilitationSystem\obj\Debug\net8.0
 C:\Users\USER\Desktop\RehabilitationSystem\RehabilitationSystem\obj\Debug\net8.0\RehabilitationSystem.pdb
 C:\Users\USER\Desktop\RehabilitationSystem\RehabilitationSystem\obj\Debug\net8.0\RehabilitationSystem.genruntimeconfig.cache
 C:\Users\USER\Desktop\RehabilitationSystem\RehabilitationSystem\obj\Debug\net8.0\ref\RehabilitationSystem.dll
+=======
+C:\Users\User\Desktop\groupProject\RehabilitationSystem\obj\Debug\net8.0\RehabilitationSystem.sourcelink.json
+>>>>>>> dd43ff20db323583a9b9b02eb1cd78c321314c8c

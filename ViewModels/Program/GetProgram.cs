@@ -10,9 +10,7 @@ namespace RehabilitationSystem.ViewModels.Program
 {
     public class GetProgram
     {
-        
         public string? ProgramId { get; set; }
-
         public string? Name { get; set; }
         public string? Objective { get; set; }
         public string? Description { get; set; }
