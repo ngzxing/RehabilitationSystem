@@ -1,0 +1,36 @@
+﻿
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Create Announcement</h1>
+            <hr />
+            <form class="forms-sample">
+                <div class="form-group">
+                    @* <input asp-for="ProgramName" class="form-control"/>
+                    <label asp-for="ProgramName" class="ms-2">Program Name</label>
+                    <span asp-validation-for="ProgramName" class="text-danger"></span> *@
+                    <label for="">Title</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="">Text</label>
+                    <textarea id="editor" style="display: none; height: 500px" rows="10" placeholder="Type something..."></textarea>
+                    <script>
+                        ClassicEditor
+                            .create(document.querySelector('#editor'))
+                            .then(editor => {
+                                console.log(editor);
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    </script>
+                </div>
+                <button type="submit" class="btn btn-primary me-2">Submit</button>
+                <button type="reset" class="btn btn-light">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+

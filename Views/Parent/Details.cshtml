@@ -1,0 +1,120 @@
+﻿<div class="row">
+    <div class="col-md-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">Parent: parentName</p>
+
+                <div class="row">
+                    <div class="col-xl-4">
+                        <!-- Profile picture card-->
+                        <div class="card mb-4">
+                            <div class="card-header mt-2"><h3>Profile Picture</h3></div>
+                            <div class="card-body text-center">
+                                <!-- Profile picture image-->
+                                <img class="img-account-profile rounded-circle mb-2" src="~/images/faces/face1.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8">
+                        <!-- Account details card-->
+                        <div class="card mb-4">
+                            <div class="card-header mt-2">
+                                <h3>Parent Details</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-body">
+                                    <h1 class="card-title">Name</h1>
+                                    <p>unknown</p>
+                                </div>
+                                <div class="card-body">
+                                    <h1 class="card-title">Address</h1>
+                                    <p>unknown</p>
+                                </div>
+                                <div class="row ms-0">
+                                    <div class="card-body col-1">
+                                        <p class="card-title">Email</p>
+                                        <p>unknown</p>
+                                    </div>
+                                    <div class="card-body col-1 mt-2">
+                                        <p class="card-title">Phone Number</p>
+                                        <p>unknown</p>
+                                    </div>
+                                </div>
+                                <div class="row ms-0">
+                                    <div class="card-body col-1">
+                                        <p class="card-title">No. of registered children</p>
+                                        <p>unknown</p>
+                                    </div>
+                                    <div class="card-body col-1 mt-2">
+                                        <p class="card-title">Payment Status</p>
+                                        <p>unknown</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Child/children card-->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <p class="card-title">Registered Child/Children</p>
+                        <div class="table-responsive">
+                            <table id="recent-purchases-listing" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Age</th>
+                                        <th>DOB</th>
+                                        <th>Program</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @* @foreach (var obj in Model)
+                                    {
+                                    <tr>
+                                    <td>@obj.Name</td>
+                                    <td>dummydata</td>
+                                    <td>dummydata</td>
+                                    <td>dummydata</td>
+                                    <td>dummydata</td>
+                                    </tr>
+                                    } *@
+                                    <tr>
+                                        <td>dummydata</td>
+                                        <td>dummydata</td>
+                                        <td>dummydata</td>
+                                        <td>dummydata</td>
+                                        <td>
+                                            <a asp-controller="Student" asp-action="Details" class="btn btn-primary col-sm-4 col-md-2 col-lg-4">
+                                                <i class="mdi mdi-table-edit"></i> <p>Edit</p>
+                                            </a>
+                                            <a onclick="" class="btn btn-danger col-sm-4 col-md-2 col-lg-4">
+                                                <i class="mdi mdi-delete-forever"></i> <p>Delete</p>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>dummydata</td>
+                                        <td>dummydata</td>
+                                        <td>dummydata</td>
+                                        <td>dummydata</td>
+                                        <td>
+                                            <a asp-controller="Student" asp-action="Details" class="btn btn-primary col-sm-4 col-md-2 col-lg-4">
+                                                <i class="mdi mdi-table-edit"></i> <p>Edit</p>
+                                            </a>
+                                            <a onclick="" class="btn btn-danger col-sm-4 col-md-2 col-lg-4">
+                                                <i class="mdi mdi-delete-forever"></i> <p>Delete</p>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

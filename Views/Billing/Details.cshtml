@@ -1,0 +1,125 @@
+﻿<div class="row">
+    <div class="col-md-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">Billing no.: Unknown</p>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <!-- Account details card-->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="row ms-0">
+                                    <div class="card-body col-1">
+                                        <p class="card-title">Parent Name</p>
+                                        <p>unknown</p>
+                                    </div>
+                                    <div class="card-body col-1 mt-2">
+                                        <p class="card-title">Student Name</p>
+                                        <p>unknown</p>
+                                    </div>
+                                </div>
+                                <div class="row ms-0">
+                                    <div class="card-body col-1">
+                                        <p class="card-title">Email</p>
+                                        <p>unknown</p>
+                                    </div>
+                                    <div class="card-body col-1 mt-2">
+                                        <p class="card-title">Phone Number</p>
+                                        <p>unknown</p>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h1 class="card-title">Payment Status</h1>
+                                    <p>unknown</p>
+                                </div>
+                                <div class="card-body">
+                                    <h1 class="card-title">Billing Items</h1>
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <div class="mb-md-0">
+                                                <a asp-controller="Program" asp-action="Create" class="btn btn-success mt-2 mt-xl-0">
+                                                    <i class="mdi mdi-plus"></i> &nbsp Add Item
+                                                </a>
+                                                <br><br>
+                                                <div class="table-responsive">
+                                                    <table id="recent-purchases-listing" class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Item Name</th>
+                                                                <th>Unit Price</th>
+                                                                <th>Quantity</th>
+                                                                <th>Price</th>
+                                                                <th>Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @* @foreach (var obj in Model)
+                                                            {
+                                                            <tr>
+                                                            <td>@obj.Name</td>
+                                                            <td>dummydata</td>
+                                                            <td>dummydata</td>
+                                                            <td>dummydata</td>
+                                                            <td>
+                                                            <a onclick="" class="btn btn-danger col-sm-4 col-md-2 col-lg-4">
+                                                            <i class="mdi mdi-delete-forever"></i> <p>Delete</p>
+                                                            </a>
+                                                            </td>
+                                                            </tr>
+                                                            } *@
+                                                            <tr>
+                                                                <td>dummydata</td>
+                                                                <td>dummydata</td>
+                                                                <td>dummydata</td>
+                                                                <td>dummydata</td>
+                                                                <td>
+                                                                    <a onclick="Delete('')" class="btn btn-datatable btn-icon">
+                                                                        <i class="mdi mdi-delete-forever" style="color:red; font-size:25px;"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>dummydata</td>
+                                                                <td>dummydata</td>
+                                                                <td>dummydata</td>
+                                                                <td>dummydata</td>
+                                                                <td>
+                                                                    <a onclick="Delete('')" class="btn btn-datatable btn-icon">
+                                                                        <i class="mdi mdi-delete-forever" style="color:red; font-size:25px;"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                       
+                                                </div>
+
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-12 grid-margin">
+                                                    <div class="d-flex justify-content-between flex-wrap">
+                                                        <div class="d-flex align-items-end flex-wrap">
+                                                        </div>
+                                                        <div class="d-flex justify-content-between align-items-end flex-wrap">
+                                                            <h5 class="ms-5 me-xxl-5">Total Price: RM Unknown</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
