@@ -48,7 +48,17 @@ public static class MapperExtensions
                 Email = admin.AppUser.Email
             } : null,
             Announcements = includes.Contains("Announcements") 
-                ? admin.Announcements!.AsQueryable().ToViewModel(new List<string>{}).ToList() : null
+                ? (ICollection<GetAnnouncement>)admin.Announcements!.Select(a => new GetAnnouncement
+                    {
+                        AnnouncementId = a.AnnouncementId,
+                        Title = a.Title,
+                        Content = a.Content,
+                        Date = a.Date,
+                        Status = a.Status,
+                        AdminId = a.AdminId,
+                        Admin = null
+                    }
+                ) : null
         });
     }
 
@@ -103,7 +113,13 @@ public static class MapperExtensions
             PaymentDate = b.PaymentDate,
             ProgramName = b.ProgramStudent!.Program!.Name,
             BillingItems = includes.Contains("BillingItems") 
-                ? b.BillingItems!.AsQueryable().ToViewModel().ToList() : null,
+                ? (ICollection<GetBillingItem>)b.BillingItems!.Select(bi => new GetBillingItem
+                {
+                    BillingItemId = bi.BillingItemId,
+                    Description = bi.Description,
+                    Price = bi.Price,
+                    Amount = bi.Amount
+                }): null,
             StudentId = b.ProgramStudent.Student!.StudentId,
             StudentName = b.ProgramStudent.Student.Name,
             ParentId = b.ProgramStudent.Student.Parent!.ParentId,
@@ -173,12 +189,25 @@ public static class MapperExtensions
                 Email = parent.AppUser.Email
             } : null,
             Students = includes.Contains("Students") 
-                ? parent.Students!.AsQueryable().ToViewModel(new List<string>{}).ToList() : null
+                ? (ICollection<GetStudent>)parent.Students!.Select(s => new GetStudent
+                    {
+                        StudentId = s.StudentId,
+                        Name = s.Name,
+                        Gender = s.Gender,
+                        Age = s.Age,
+                        DOB = s.DOB,
+                        ParentId = s.ParentId,
+                        Parent = null,
+                        ProgramStudents = null
+                    })
+                : null
         });
     }
 
     public static IQueryable<GetProgram> ToViewModel(this IQueryable<RehabilitationSystem.Models.Program> query, List<string> includes)
-    {
+    {   
+        
+
         var baseQuery = query;
 
         if (includes.Contains("Sessions"))
@@ -199,9 +228,30 @@ public static class MapperExtensions
             Description = program.Description,
             Price = program.Price,
             Sessions = includes.Contains("Sessions") 
-                ? program.Sessions!.AsQueryable().ToViewModel(new List<string>{}).ToList() : null,
+                ? (ICollection<GetSession>)program.Sessions!.Select( session => new GetSession
+                {
+                    SessionId = session.SessionId,
+                    Name = session.Name,
+                    Description = session.Description,
+                    Therapists =  null,
+                    Slots = null
+                }) : null,
             Billings = includes.Contains("Billings") 
-                ? program.Billings!.AsQueryable().ToViewModel(new List<string>{}).ToList() : null
+                ? (ICollection<GetBilling>)program.Billings!.Select(b => new GetBilling
+                    {
+                        BillingId = b.BillingId,
+                        IssueDate = b.IssueDate,
+                        TotalPayAmount = b.TotalPayAmount,
+                        PaymentStatus = b.PaymentStatus,
+                        PaymentDate = b.PaymentDate,
+                        ProgramName = b.ProgramStudent!.Program!.Name,
+                        BillingItems = null,
+                        StudentId = b.ProgramStudent.Student!.StudentId,
+                        StudentName = b.ProgramStudent.Student.Name,
+                        ParentId = b.ProgramStudent.Student.Parent!.ParentId,
+                        ParentName = b.ProgramStudent.Student.Parent.Name
+                    }
+                ): null
         });
     }
 
@@ -259,9 +309,27 @@ public static class MapperExtensions
                 ParentId = ps.Student.ParentId
             } : null,
             Reports = includes.Contains("Reports") 
-                ? ps.Reports!.AsQueryable().ToViewModel(new List<string>{}).ToList() : null,
+                ? (ICollection<GetReport>)ps.Reports!.Select(r => new GetReport
+                    {
+                        ReportId = r.ReportId,
+                        Title = r.Title,
+                        Content = r.Content,
+                        ProgramStudentId = r.ProgramStudentId,
+                        TherapistId = r.TherapistId,
+                        ProgramStudent =  null,
+                        Therapist = null
+                    
+                    }
+                ): null,
             ProgramStudentSlots = includes.Contains("ProgramStudentSlots") 
-                ? ps.ProgramStudentSlots!.AsQueryable().ToViewModel(new List<string>{}).ToList() : null,
+                ? (ICollection<GetProgramStudentSlot>)ps.ProgramStudentSlots!.Select(pss => new GetProgramStudentSlot
+                    {
+                        ProgramStudentSlotId = pss.ProgramStudentSlotId,
+                        ProgramStudentId = pss.ProgramStudentId,
+                        ProgramStudent = null,
+                        SlotId = pss.SlotId,
+                        Slot = null
+                    }) : null,
             Billing = includes.Contains("Billing") ? new GetBilling
             {
                 BillingId = ps.Billing!.BillingId,
@@ -409,9 +477,17 @@ public static class MapperExtensions
                         Description = ts.Session!.Description,
                     } : null,
                 Slots = includes.Contains("Slots") ? 
-                    ts.Slots!.AsQueryable().ToViewModel(new List<string>{}).ToList()
+                    (ICollection<GetSlot>)ts.Slots!.Select(slot => new GetSlot
+                        {
+                            SlotId = slot.SlotId,
+                            StartTime = slot.StartTime,
+                            EndTime = slot.EndTime,
+                            TherapistSession = null,
+                            ProgramStudentSlots = null
+                        }
+                    )
                     : null
-            });
+        });
     }
 
 
@@ -442,7 +518,15 @@ public static class MapperExtensions
             } : null,
 
             ProgramStudentSlots = includes.Contains("ProgramStudentSlots") ? 
-                slot.ProgramStudentSlots!.AsQueryable().ToViewModel(new List<string>{}).ToList() 
+                (ICollection<GetProgramStudentSlot>)slot.ProgramStudentSlots!.Select(pss => new GetProgramStudentSlot
+                    {
+                        ProgramStudentSlotId = pss.ProgramStudentSlotId,
+                        ProgramStudentId = pss.ProgramStudentId,
+                        ProgramStudent = null,
+                        SlotId = pss.SlotId,
+                        Slot = null
+                    }
+                ) 
                 : null
         });
     }
@@ -482,7 +566,20 @@ public static class MapperExtensions
                 AppUserId = s.Parent.AppUserId
             } : null,
             ProgramStudents = includes.Contains("ProgramStudents") 
-                ? s.ProgramStudents!.AsQueryable().ToViewModel(new List<string>{}).ToList() : null
+                ? (ICollection<GetProgramStudent>)s.ProgramStudents!.Select(ps => new GetProgramStudent
+                    {
+                        ProgramStudentId = ps.ProgramStudentId,
+                        RegisterDate = ps.RegisterDate,
+                        ProgramId = ps.ProgramId,
+                        Program = null,
+                        StudentId = ps.StudentId,
+                        Student = null,
+                        Reports = null,
+                        ProgramStudentSlots = null,
+                        Billing = null
+                    }
+                    
+                ) : null
         });
     }
 
@@ -511,7 +608,17 @@ public static class MapperExtensions
                 Email = t.AppUser.Email
             } : null,
             Reports = includes.Contains("Reports") 
-                ? t.Reports!.AsQueryable().ToViewModel(new List<string>{}).ToList() : null
+                ? (ICollection<GetReport>)t.Reports!.Select(r => new GetReport
+                    {
+                        ReportId = r.ReportId,
+                        Title = r.Title,
+                        Content = r.Content,
+                        ProgramStudentId = r.ProgramStudentId,
+                        TherapistId = r.TherapistId,
+                        ProgramStudent = null,
+                        Therapist = null
+                    }
+                ) : null
         });
     }
 
