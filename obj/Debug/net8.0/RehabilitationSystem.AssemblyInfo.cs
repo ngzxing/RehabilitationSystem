@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RehabilitationSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fdefb270e34efe0dabcb512ece31ec1bf2eecca4")]
 [assembly: System.Reflection.AssemblyProductAttribute("RehabilitationSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RehabilitationSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -265,3 +265,4 @@ C:\Users\User\Desktop\groupProject\RehabilitationSystem\obj\Debug\net8.0\Rehabil
 C:\Users\User\Desktop\groupProject\RehabilitationSystem\obj\Debug\net8.0\RehabilitationSystem.genruntimeconfig.cache
 C:\Users\User\Desktop\groupProject\RehabilitationSystem\obj\Debug\net8.0\ref\RehabilitationSystem.dll
 C:\Users\User\Desktop\groupProject\RehabilitationSystem\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\User\Desktop\groupProject\RehabilitationSystem\obj\Debug\net8.0\RehabilitationSystem.sourcelink.json

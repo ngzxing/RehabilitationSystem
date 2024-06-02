@@ -44,21 +44,21 @@ namespace RehabilitationSystem.Data
             modelBuilder.Entity<Admin>()
                 .HasOne(a => a.AppUser)
                 .WithOne(a => a.Admin)
-                .HasForeignKey<Parent>(p => p.AppUserId)
+                .HasForeignKey<Admin>(p => p.AppUserId)
                 .HasPrincipalKey<AppUser>(a => a.Id)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Therapist>()
                 .HasOne(a => a.AppUser)
                 .WithOne(a => a.Therapist)
-                .HasForeignKey<Parent>(p => p.AppUserId)
+                .HasForeignKey<Therapist>(p => p.AppUserId)
                 .HasPrincipalKey<AppUser>(a => a.Id)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<CustomerService>()
                 .HasOne(a => a.AppUser)
                 .WithOne(a => a.CustomerService)
-                .HasForeignKey<Parent>(p => p.AppUserId)
+                .HasForeignKey<CustomerService>(p => p.AppUserId)
                 .HasPrincipalKey<AppUser>(a => a.Id)
                 .OnDelete(DeleteBehavior.NoAction);
 

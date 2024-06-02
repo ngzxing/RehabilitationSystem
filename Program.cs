@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RehabilitationSystem.Data;
+using RehabilitationSystem.Interfaces;
 using RehabilitationSystem.Models;
+using RehabilitationSystem.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,21 @@ builder.Services.AddDbContext<ApplicationDbContext>( options =>{
     options.UseSqlServer(connection_string);
 });
 
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
+builder.Services.AddScoped<IBillingItemRepository, BillingItemRepository>();
+builder.Services.AddScoped<ICustomerServiceRepository, CustomerServiceRepository>();
+builder.Services.AddScoped<IExtendUserRepository, ExtendUserRepository>();
+builder.Services.AddScoped<IParentRepository, ParentRepository>();
+builder.Services.AddScoped<IProgramRepository, ProgramRepository>();
+builder.Services.AddScoped<IProgramStudentRepository, ProgramStudentRepository>();
+builder.Services.AddScoped<IProgramStudentSlotRepository, ProgramStudentSlotRepository>();
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
+builder.Services.AddScoped<ISessionRepository, SessionRepository>();
+builder.Services.AddScoped<ISlotRepository, SlotRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<ITherapistRepository, TherapistRepository>();
+builder.Services.AddScoped<ITherapistSessionRepository, TherapistSessionRepository>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
