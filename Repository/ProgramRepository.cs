@@ -33,7 +33,6 @@ namespace RehabilitationSystem.Repository
             if (query.MinPrice.HasValue)
                 programs = programs.Where(p => p.Price >= query.MinPrice.Value);
 
-
             // Selecting the view model
             return await programs.ToViewModel(includes).ToListAsync();
         }

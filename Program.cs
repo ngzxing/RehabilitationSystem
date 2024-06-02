@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RehabilitationSystem.Data;
 using RehabilitationSystem.Models;
+using RehabilitationSystem.Interfaces;
+using RehabilitationSystem.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,22 @@ builder.Services.AddDbContext<ApplicationDbContext>( options =>{
 
     options.UseSqlServer(connection_string);
 });
+
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+/*builder.Services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
+*/builder.Services.AddScoped<IBillingItemRepository, BillingItemRepository>();
+builder.Services.AddScoped<ICustomerServiceRepository, CustomerServiceRepository>();
+builder.Services.AddScoped<IExtendUserRepository, ExtendUserRepository>();
+builder.Services.AddScoped<IParentRepository, ParentRepository>();
+builder.Services.AddScoped<IProgramRepository, ProgramRepository>();
+builder.Services.AddScoped<IProgramStudentRepository, ProgramStudentRepository>();
+builder.Services.AddScoped<IProgramStudentSlotRepository, ProgramStudentSlotRepository>();
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
+builder.Services.AddScoped<ISessionRepository, SessionRepository>();
+builder.Services.AddScoped<ISlotRepository, SlotRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<ITherapistRepository, TherapistRepository>();
+builder.Services.AddScoped<ITherapistSessionRepository, TherapistSessionRepository>();
 
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
@@ -25,6 +43,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -43,6 +62,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

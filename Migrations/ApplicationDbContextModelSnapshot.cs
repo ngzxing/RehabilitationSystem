@@ -51,25 +51,25 @@ namespace RehabilitationSystem.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5a7f1b08-41fe-4481-9fd2-3bf358695f26",
+                            Id = "4ae12bc1-e040-48fc-9515-f5a1a016cd31",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "21fdc479-afee-4e09-a471-dd8a0631e6cc",
+                            Id = "8bd9ff84-03fe-4406-9701-286dec855ca8",
                             Name = "Therapist",
                             NormalizedName = "THERAPIST"
                         },
                         new
                         {
-                            Id = "35191751-2291-41e2-863b-25ec644c7ecc",
+                            Id = "b9a9fcc6-c05e-42b8-9631-585dd1f404dc",
                             Name = "CustomerService",
                             NormalizedName = "CUSTOMERSERVICE"
                         },
                         new
                         {
-                            Id = "4e7ef3dd-d9c2-4c6a-982e-9230dc975000",
+                            Id = "1f3cffed-0351-4f88-a2a5-ec4fb9d028b4",
                             Name = "Parent",
                             NormalizedName = "PARENT"
                         });
@@ -196,7 +196,8 @@ namespace RehabilitationSystem.Migrations
 
                     b.HasKey("AdminId");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
 
                     b.ToTable("Admins");
 
@@ -246,7 +247,7 @@ namespace RehabilitationSystem.Migrations
                             AnnouncementId = "announcement1",
                             AdminId = "admin1",
                             Content = "Content of Announcement One",
-                            Date = new DateTime(2024, 5, 30, 9, 57, 25, 138, DateTimeKind.Local).AddTicks(4462),
+                            Date = new DateTime(2024, 6, 1, 22, 46, 55, 68, DateTimeKind.Local).AddTicks(4285),
                             Status = true,
                             Title = "Announcement One"
                         });
@@ -321,15 +322,15 @@ namespace RehabilitationSystem.Migrations
                         {
                             Id = "user1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f3e0d7ce-c005-4e08-b3b7-cde37a7aa872",
+                            ConcurrencyStamp = "4365f877-2d0e-4acf-acd0-2ca571cf0c5c",
                             Email = "admin1@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN1@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDr+TF0mdnmyKJ53MHT+pT0uMgiKcILHNENt5byZxwhmxUX5guqrAgANtSNYk11whw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGvSp2DAFwND3sIGfF0yoKbvX6/DcwqeWEVzd93ioGQrO6WEjwI+cvT0Isvw7yZELA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7c73e058-a872-4f74-8113-d89c13b0d943",
+                            SecurityStamp = "2511b64d-82c2-4e8d-8149-01578e1f6351",
                             TwoFactorEnabled = false,
                             UserName = "admin1"
                         },
@@ -337,15 +338,15 @@ namespace RehabilitationSystem.Migrations
                         {
                             Id = "user2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1630e5c0-a052-4d30-8a9a-78cb412e13f4",
+                            ConcurrencyStamp = "0d4f4aa6-313c-42b4-bd9e-66d6051baec2",
                             Email = "therapist1@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "THERAPIST1@EXAMPLE.COM",
                             NormalizedUserName = "THERAPIST1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAw3itUexneTcWo1/SD4g39PoYBjBxgiHX7bGH7Nn9IncnEPL0rQDaSBzRLyNvtZqA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBK3ODLlYAEAVflRa4NXWANT3Sn7lWbTAdlUk4CGWE9bx2p5LDqErzAggRXz0G2FMQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "31d8d600-5fec-4789-bfd0-ac0e28362fdb",
+                            SecurityStamp = "ee576314-b972-4510-8d53-631e3efef285",
                             TwoFactorEnabled = false,
                             UserName = "therapist1"
                         },
@@ -353,15 +354,15 @@ namespace RehabilitationSystem.Migrations
                         {
                             Id = "user3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aff279d7-b80b-4899-8db7-c04dc3e3476c",
+                            ConcurrencyStamp = "2fbb288d-2664-4a24-b88d-7b316b0abb6e",
                             Email = "customerService1@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMERSERVICE1@EXAMPLE.COM",
                             NormalizedUserName = "CUSTOMERSERVICE1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIIbe+8JkgGqP+F4VL4oAYk3dtJitlsHNEEUL6+yh1JJUXC45WZTKs86ybVjIPLRDg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOqHciQRsU8gRKz/mJnN24XvtVYipcMFRGO/zWrUHM6VDGeoy5TKA3xbQQiKEEkiPQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a768d9a9-06fb-4997-803f-defbdb62e673",
+                            SecurityStamp = "fa957701-c2fc-47c4-92e8-cc7f98a3678d",
                             TwoFactorEnabled = false,
                             UserName = "customerService1"
                         },
@@ -369,15 +370,15 @@ namespace RehabilitationSystem.Migrations
                         {
                             Id = "user4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3b69883b-b4b2-4f2b-877b-b14abc545b60",
+                            ConcurrencyStamp = "0f31e78d-8357-4729-bdea-d2439941a022",
                             Email = "parent1@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "PARENT1@EXAMPLE.COM",
                             NormalizedUserName = "PARENT1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOO8Civ+9f8TPKdfge8srC9Z8/kd7qT7+W+6PbAS+3UREJf1fzFGRjTVzmsGbTYH5w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEOXLXdFTwmeRZEutE4hOO/5FkfZIZKQRDUcKTWfxuyfSqxbAskmsxvPVe0gxOA5aA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "079f0203-4e74-4b04-bc78-040df9a1c2ac",
+                            SecurityStamp = "8a3e23c5-99de-432a-8d3b-ee294e9cda40",
                             TwoFactorEnabled = false,
                             UserName = "parent1"
                         });
@@ -429,7 +430,7 @@ namespace RehabilitationSystem.Migrations
                         new
                         {
                             BillingId = "billing1",
-                            IssueDate = new DateTime(2024, 5, 30, 9, 57, 25, 138, DateTimeKind.Local).AddTicks(3508),
+                            IssueDate = new DateTime(2024, 6, 1, 22, 46, 55, 68, DateTimeKind.Local).AddTicks(3934),
                             PaymentStatus = false,
                             ProgramStudentId = "programStudent1",
                             TotalPayAmount = 200.0m
@@ -461,7 +462,7 @@ namespace RehabilitationSystem.Migrations
 
                     b.HasIndex("BillingId");
 
-                    b.ToTable("BillingItem");
+                    b.ToTable("BillingItems");
 
                     b.HasData(
                         new
@@ -489,7 +490,8 @@ namespace RehabilitationSystem.Migrations
 
                     b.HasKey("CustomerServiceId");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
 
                     b.ToTable("CustomerServices");
 
@@ -537,7 +539,8 @@ namespace RehabilitationSystem.Migrations
 
                     b.HasKey("ParentId");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
 
                     b.ToTable("Parents");
 
@@ -623,7 +626,7 @@ namespace RehabilitationSystem.Migrations
                         {
                             ProgramStudentId = "programStudent1",
                             ProgramId = "program1",
-                            RegisterDate = new DateTime(2024, 5, 30, 9, 57, 25, 138, DateTimeKind.Local).AddTicks(2654),
+                            RegisterDate = new DateTime(2024, 6, 1, 22, 46, 55, 68, DateTimeKind.Local).AddTicks(3455),
                             StudentId = "student1"
                         });
                 });
@@ -631,12 +634,15 @@ namespace RehabilitationSystem.Migrations
             modelBuilder.Entity("RehabilitationSystem.Models.ProgramStudentSlot", b =>
                 {
                     b.Property<string>("ProgramStudentSlotId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProgramStudentId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("SlotId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ProgramStudentSlotId");
@@ -645,7 +651,7 @@ namespace RehabilitationSystem.Migrations
 
                     b.HasIndex("SlotId");
 
-                    b.ToTable("ProgramStudentSlot");
+                    b.ToTable("ProgramStudentSlots");
 
                     b.HasData(
                         new
@@ -685,7 +691,7 @@ namespace RehabilitationSystem.Migrations
                     b.HasIndex("ProgramStudentId", "TherapistId")
                         .IsUnique();
 
-                    b.ToTable("Report");
+                    b.ToTable("Reports");
 
                     b.HasData(
                         new
@@ -738,10 +744,6 @@ namespace RehabilitationSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime?>("Date")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime?>("EndTime")
                         .IsRequired()
                         .HasColumnType("datetime2");
@@ -763,9 +765,8 @@ namespace RehabilitationSystem.Migrations
                         new
                         {
                             SlotId = "slot1",
-                            Date = new DateTime(2024, 5, 30, 0, 0, 0, 0, DateTimeKind.Local),
-                            EndTime = new DateTime(2024, 5, 30, 11, 57, 25, 138, DateTimeKind.Local).AddTicks(3171),
-                            StartTime = new DateTime(2024, 5, 30, 10, 57, 25, 138, DateTimeKind.Local).AddTicks(3031),
+                            EndTime = new DateTime(2024, 6, 2, 0, 46, 55, 68, DateTimeKind.Local).AddTicks(3694),
+                            StartTime = new DateTime(2024, 6, 1, 23, 46, 55, 68, DateTimeKind.Local).AddTicks(3614),
                             TherapistSessionId = "therapistSession1"
                         });
                 });
@@ -827,7 +828,8 @@ namespace RehabilitationSystem.Migrations
 
                     b.HasKey("TherapistId");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
 
                     b.ToTable("Therapists");
 
@@ -861,7 +863,7 @@ namespace RehabilitationSystem.Migrations
                     b.HasIndex("TherapistId", "SessionId")
                         .IsUnique();
 
-                    b.ToTable("TherapistSession");
+                    b.ToTable("TherapistSessions");
 
                     b.HasData(
                         new
@@ -926,9 +928,9 @@ namespace RehabilitationSystem.Migrations
             modelBuilder.Entity("RehabilitationSystem.Models.Admin", b =>
                 {
                     b.HasOne("RehabilitationSystem.Models.AppUser", "AppUser")
-                        .WithMany("Admins")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne("Admin")
+                        .HasForeignKey("RehabilitationSystem.Models.Admin", "AppUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("AppUser");
@@ -968,9 +970,9 @@ namespace RehabilitationSystem.Migrations
             modelBuilder.Entity("RehabilitationSystem.Models.CustomerService", b =>
                 {
                     b.HasOne("RehabilitationSystem.Models.AppUser", "AppUser")
-                        .WithMany("CustomerServices")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne("CustomerService")
+                        .HasForeignKey("RehabilitationSystem.Models.CustomerService", "AppUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("AppUser");
@@ -979,9 +981,9 @@ namespace RehabilitationSystem.Migrations
             modelBuilder.Entity("RehabilitationSystem.Models.Parent", b =>
                 {
                     b.HasOne("RehabilitationSystem.Models.AppUser", "AppUser")
-                        .WithMany("Parents")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne("Parent")
+                        .HasForeignKey("RehabilitationSystem.Models.Parent", "AppUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("AppUser");
@@ -1020,12 +1022,14 @@ namespace RehabilitationSystem.Migrations
                     b.HasOne("RehabilitationSystem.Models.ProgramStudent", "ProgramStudent")
                         .WithMany("ProgramStudentSlots")
                         .HasForeignKey("ProgramStudentId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("RehabilitationSystem.Models.Slot", "Slot")
                         .WithMany("ProgramStudentSlots")
                         .HasForeignKey("SlotId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ProgramStudent");
 
@@ -1086,9 +1090,9 @@ namespace RehabilitationSystem.Migrations
             modelBuilder.Entity("RehabilitationSystem.Models.Therapist", b =>
                 {
                     b.HasOne("RehabilitationSystem.Models.AppUser", "AppUser")
-                        .WithMany("Therapists")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne("Therapist")
+                        .HasForeignKey("RehabilitationSystem.Models.Therapist", "AppUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("AppUser");
@@ -1120,13 +1124,13 @@ namespace RehabilitationSystem.Migrations
 
             modelBuilder.Entity("RehabilitationSystem.Models.AppUser", b =>
                 {
-                    b.Navigation("Admins");
+                    b.Navigation("Admin");
 
-                    b.Navigation("CustomerServices");
+                    b.Navigation("CustomerService");
 
-                    b.Navigation("Parents");
+                    b.Navigation("Parent");
 
-                    b.Navigation("Therapists");
+                    b.Navigation("Therapist");
                 });
 
             modelBuilder.Entity("RehabilitationSystem.Models.Billing", b =>
