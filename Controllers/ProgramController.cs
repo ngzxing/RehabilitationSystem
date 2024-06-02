@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,18 +11,18 @@ namespace RehabilitationSystem.Controllers
 {
     public class ProgramController : Controller
     {
-        private readonly IProgramRepository _program;
+        private readonly IProgramRepository _programRepo;
 
-        public ProgramController(IProgramRepository program)
+        public ProgramController(IProgramRepository programRepo)
         {
-            _program = program;
+            _programRepo = programRepo;
         }
         // GET: ProgramController
         public async Task<IActionResult> Index()
         {
             ProgramQuery query = new ProgramQuery() { };
-            List<string> includes = new List<string> { "Sessions" };
-            List<GetProgram> ProgramVM = await _program.GetAllAsync(query, includes);
+            List<string> includes = new List<string>();
+            List<GetProgram> ProgramVM = await _programRepo.GetAllAsync(query, includes);
             return View(ProgramVM);
         }
 
@@ -34,7 +33,7 @@ namespace RehabilitationSystem.Controllers
         }
 
         // GET: ProgramController/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -42,10 +41,11 @@ namespace RehabilitationSystem.Controllers
         // POST: ProgramController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(AddProgram program)
         {
             try
             {
+                await _programRepo.AddAsync(program);
                 return RedirectToAction(nameof(Index));
             }
             catch

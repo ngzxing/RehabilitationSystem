@@ -1,29 +1,34 @@
-﻿@model Program
+﻿@using RehabilitationSystem.ViewModels.Program;
+@model AddProgram
 
 <div class="col-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
             <h1 class="card-title">Create Program</h1>
             <hr />
-            <form class="forms-sample">
+            <form  method="post" class="forms-sample">
                 <div class="form-group">
                     @* <input asp-for="ProgramName" class="form-control"/>
-                    <label asp-for="ProgramName" class="ms-2">Program Name</label>
-                    <span asp-validation-for="ProgramName" class="text-danger"></span> *@
-                    <label for="exampleInputName1">Program Name</label>
-                    <input type="text" class="form-control" id="exampleInputName1" placeholder="">
+                        <label asp-for="ProgramName" class="ms-2">Program Name</label>
+                        <span asp-validation-for="ProgramName" class="text-danger"></span> *@
+                    <label asp-for="Name">Program Name</label>
+                    <input asp-for="Name" type="text" class="form-control" id="exampleInputName1" placeholder="">
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail3">Program Objective</label>
-                    <input type="text" class="form-control" id="exampleInputName1" placeholder="">
+                    <label asp-for="Objective">Program Objective</label>
+                    <input asp-for="Objective" type="text" class="form-control" id="exampleInputName1" placeholder="">
+                    <span asp-validation-for="Objective" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword4">Program Description</label>
-                    <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                    <label asp-for="Description">Program Description</label>
+                    <textarea asp-for="Description" class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label for="exampleSelectGender">Program Price</label>
-                    <input type="number" class="form-control" id="exampleInputName1" placeholder="">
+                    <label asp-for="Price">Program Price</label>
+                    <input asp-for="Price" type="number" class="form-control" id="exampleInputName1" placeholder="">
+                    <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
                 <button type="submit" class="btn btn-primary me-2">Submit</button>
                 <button type="reset" class="btn btn-light">Cancel</button>
