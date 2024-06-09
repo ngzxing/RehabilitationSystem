@@ -1,15 +1,14 @@
-﻿<div class="row">
+﻿@using RehabilitationSystem.ViewModels.Parent;
+
+@model List<GetParent>
+
+<div class="row">
     <div class="col-md-12 grid-margin">
         <div class="d-flex justify-content-between flex-wrap">
             <div class="d-flex align-items-end flex-wrap">
                 <div class="me-md-3 me-xl-5">
                     <h2>Parent Management</h2>
                     <br />
-                    @* <div class="mb-md-0">
-                        <a asp-controller="Program" asp-action="Create" class="btn btn-success mt-2 mt-xl-0">
-                            <i class="mdi mdi-plus"></i> &nbsp Create New Program
-                        </a>
-                    </div> *@
                 </div>
             </div>
         </div>
@@ -34,45 +33,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @* @foreach (var obj in Model)
+                            @foreach (var obj in Model)
                             {
-                                <tr>
-                                    <td>@obj.Name</td>
-                                    <td>dummydata</td>
-                                    <td>dummydata</td>
-                                    <td>dummydata</td>
-                                       <td>dummydata</td>
-                                    <td>
-                                        <a onclick="" class="btn btn-danger col-sm-4 col-md-2 col-lg-4">
-                                            <i class="mdi mdi-delete-forever"></i> <p>Delete</p>
-                                        </a>
-                                    </td>
-                                </tr>
-                            } *@
                             <tr>
-                                <td>dummydata</td>
-                                <td>dummydata</td>
-                                <td>dummydata</td>
-                                <td>dummydata</td>
-                                <td>dummydata</td>
                                 <td>
-                                    <a onclick="Delete('')" class="btn">
+                                    <a asp-controller="Parent" asp-action="Details" asp-route-id="@obj.ParentId">
+                                        @obj.Name
+                                    </a>
+                                </td>
+                                <td>@obj.AppUser.Email</td>
+                                <td>@obj.AppUser.PhoneNumber</td>
+                                @*<td>@obj.Name</td>
+                                <td>@obj.Name</td>*@
+                                <td>@obj.Students.Count</td>
+                                <td>@obj.Name</td>
+                                <td>
+                                    <a onclick="" class="btn btn-icon">
                                         <i class="mdi mdi-delete-forever" style="color:red; font-size:25px;"></i>
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>dummydata</td>
-                                <td>dummydata</td>
-                                <td>dummydata</td>
-                                <td>dummydata</td>
-                                <td>dummydata</td>
-                                <td>
-                                    <a onclick="Delete('')" class="btn">
-                                        <i class="mdi mdi-delete-forever" style="color:red; font-size:25px;"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -80,27 +61,3 @@
         </div>
     </div>
 </div>
-
-
-@* function Delete(url) {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: url,
-                type: 'DELETE',
-                success: function (data) {
-                    dataTable.ajax.reload();
-                    toastr.success(data.message);
-                }
-            })
-        }
-    })
-} *@

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RehabilitationSystem.ViewModels
+namespace RehabilitationSystem.ViewModels.Billing
 {
     public class BillingQuery
     {

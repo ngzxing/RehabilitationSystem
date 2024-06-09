@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using RehabilitationSystem.Data;
 using RehabilitationSystem.Interfaces;
 using RehabilitationSystem.Models;
-using RehabilitationSystem.ViewModels;
 using RehabilitationSystem.ViewModels.Billing;
 
 namespace RehabilitationSystem.Repository
@@ -76,8 +75,6 @@ namespace RehabilitationSystem.Repository
                 IssueDate = DateTime.Now,
                 TotalPayAmount = price,
                 PaymentStatus = false,
-                
-
             };
 
             await _context.Billings.AddAsync(billing);

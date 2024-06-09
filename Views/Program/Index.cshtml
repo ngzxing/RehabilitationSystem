@@ -2,25 +2,24 @@
 
 @model List<GetProgram>
 
-<div class="card card-body">
-    <div class="row">
-        <div class="col-md-12 grid-margin">
-            <div class="d-flex justify-content-between flex-wrap">
-                <div class="d-flex align-items-end flex-wrap">
-                    <div class="me-md-3 me-xl-5">
-                        <h2>Program and Session</h2>
-                        <br />
-                        <div class="mb-md-0">
-                            <a asp-controller="Program" asp-action="Create" class="btn btn-success">
-                                <i class="mdi mdi-plus" style="font-size:15px"></i> &nbsp Create New Program
-                            </a>
-                        </div>
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="d-flex justify-content-between flex-wrap">
+            <div class="d-flex align-items-end flex-wrap">
+                <div class="me-md-3 me-xl-5">
+                    <h2>Program and Session</h2>
+                    <br />
+                    <div class="mb-md-0">
+                        <a asp-controller="Program" asp-action="Create" class="btn btn-success">
+                            <i class="mdi mdi-plus" style="font-size:15px"></i> &nbsp Create New Program
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-md-12 stretch-card">
@@ -33,7 +32,7 @@
                             <tr>
                                 <th>Program Name</th>
                                 <th>Program Price</th>
-                                <th>unknown</th>
+                                <th>No. of Sessions</th>
                                 <th>unknown</th>
                                 <th>Actions</th>
                             </tr>
@@ -42,48 +41,24 @@
                             @foreach (var obj in Model)
                             {
                                 <tr>
-                                    <td>@obj.Name</td>
+                                    <td>
+                                        <a asp-controller="Program" asp-action="Details" asp-route-id="@obj.ProgramId">
+                                            @obj.Name
+                                        </a>
+                                    </td>
                                     <td>@obj.Price</td>
-                                    <td>@obj.Name</td>
+                                    <td>@obj.Sessions!.Count</td>
                                     <td>@obj.Name</td>
                                     <td>
-                                        <a onclick="" class="btn btn-icon mt-1">
+                                        <a asp-controller="Program" asp-action="Edit" asp-route-id="@obj.ProgramId" class="btn btn-icon mt-1">
                                             <i class="mdi mdi-border-color" style="color:blue; font-size:25px;"></i>
                                         </a>
-                                        <a onclick="Delete('')" class="btn btn-icon">
+                                        <a onclick="Delete('@obj.ProgramId')" class="btn btn-icon">
                                             <i class="mdi mdi-delete-forever" style="color:red; font-size:25px;"></i>
                                         </a>
                                     </td>
                                 </tr>
                             }
-                            @*<tr>
-                                    <td>dummydata</td>
-                                    <td>dummydata</td>
-                                    <td>dummydata</td>
-                                    <td>dummydata</td>
-                                    <td>
-                                        <a onclick="" class="btn btn-icon mt-1">
-                                            <i class="mdi mdi-border-color" style="color:blue; font-size:25px;"></i>
-                                        </a>
-                                        <a onclick="Delete('')" class="btn btn-icon">
-                                            <i class="mdi mdi-delete-forever" style="color:red; font-size:25px;"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>dummydata</td>
-                                    <td>dummydata</td>
-                                    <td>dummydata</td>
-                                    <td>dummydata</td>
-                                    <td>
-                                        <a onclick="" class="btn btn-icon mt-1">
-                                            <i class="mdi mdi-border-color" style="color:blue; font-size:25px;"></i>
-                                        </a>
-                                        <a onclick="Delete('')" class="btn btn-icon">
-                                            <i class="mdi mdi-delete-forever" style="color:red; font-size:25px;"></i>
-                                        </a>
-                                    </td>
-                                </tr>*@
                         </tbody>
                     </table>
                 </div>
@@ -93,7 +68,7 @@
 </div>
 
 <script>
-    function Delete(url) {
+    function Delete(ID) {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -105,12 +80,36 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: url,
-                    type: 'DELETE',
-                    success: function (data) {
-                        dataTable.ajax.reload();
+                    type: "POST",
+                    url: 'Program/Delete', // URL of the delete action
+                    data: { id: ID },
+                    dataType: "json",
+                    @*contentType: "application/json; charset=utf-8",*@
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your program has been deleted.',
+                                'success'
+                            ).then(() => {
+                                location.reload(); // Refresh the page after confirmation dialog is closed
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                response.message,
+                                'error'
+                            );
+                        }
+                    },
+                    error: function () {
+                        Swal.fire(
+                            'Error!',
+                            'An error occurred while deleting the program.',
+                            'error'
+                        );
                     }
-                })
+                });
             }
         })
     }

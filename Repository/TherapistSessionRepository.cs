@@ -46,6 +46,34 @@ namespace RehabilitationSystem.Repository
             return therapistSession;
         }
 
+        public async Task<GetTherapistSession?> GetBySessionIdAsync(string sessionId, List<string> includes)
+        {
+            var therapistSessions = _context.TherapistSessions.AsQueryable();
+
+            var therapistSession = await therapistSessions.Where(ts => ts.SessionId == sessionId).ToViewModel(includes).FirstOrDefaultAsync();
+
+            if (therapistSession == null)
+            {
+                return null;
+            }
+
+            return therapistSession;
+        }
+
+        public async Task<GetTherapistSession?> GetByTherapistSessionIdAsync(string therapistId, string sessionId , List<string> includes)
+        {
+            var therapistSessions = _context.TherapistSessions.AsQueryable();
+
+            var therapistSession = await therapistSessions.Where(ts => ts.SessionId == sessionId && ts.TherapistId == therapistId).ToViewModel(includes).FirstOrDefaultAsync();
+
+            if (therapistSession == null)
+            {
+                return null;
+            }
+
+            return therapistSession;
+        }
+
         public async Task<string?> AddAsync(AddTherapistSession addModel)
         {
             var therapistExists = await _context.Therapists.AnyAsync(t => t.TherapistId == addModel.TherapistId);

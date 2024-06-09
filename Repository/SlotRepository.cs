@@ -70,7 +70,7 @@ namespace RehabilitationSystem.Repository
             return null;
         }
 
-        public async Task<string?> UpdateAsync(string id, UpdateSlotSlot vm)
+        public async Task<string?> UpdateAsync(string id, UpdateSlot vm)
         {
             var slot = await _context.Slots.FindAsync(id);
             if (slot == null) return "Slot Not Found";

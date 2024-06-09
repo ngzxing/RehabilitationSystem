@@ -9,15 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 string? connection_string = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>( options =>{
-
     options.UseSqlServer(connection_string);
 });
 
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IBillingItemRepository, BillingItemRepository>();
-
 builder.Services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
-builder.Services.AddScoped<IBillingItemRepository, BillingItemRepository>();
+builder.Services.AddScoped<IBillingRepository, BillingRepository>();
 builder.Services.AddScoped<ICustomerServiceRepository, CustomerServiceRepository>();
 builder.Services.AddScoped<IExtendUserRepository, ExtendUserRepository>();
 builder.Services.AddScoped<IParentRepository, ParentRepository>();

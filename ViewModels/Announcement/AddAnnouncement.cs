@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +15,7 @@ namespace RehabilitationSystem.ViewModels.Announcement
         public string? Title { get; set; }
         [Required]
         public string? Content { get; set; }
-        [Required]
+        [ValidateNever]
         public DateTime? Date { get; set; }
         
     }

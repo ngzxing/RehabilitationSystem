@@ -9,6 +9,8 @@ namespace RehabilitationSystem.Interfaces
     {
         Task<List<GetTherapistSession>> GetAllAsync(QueryTherapistSession query, List<string> includes);
         Task<GetTherapistSession?> GetByIdAsync(string id, List<string> includes);
+        Task<GetTherapistSession?> GetBySessionIdAsync(string sessionId, List<string> includes);
+        Task<GetTherapistSession?> GetByTherapistSessionIdAsync(string therapistId, string sessionId, List<string> includes);
         Task<string?> AddAsync(AddTherapistSession addModel);
         Task<string?> DeleteAsync(string id);
     }

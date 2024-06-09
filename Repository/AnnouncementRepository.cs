@@ -63,6 +63,14 @@ namespace RehabilitationSystem.Repository
             return null;
         }
 
-       
+        public async Task<string?> DeleteAsync(string id)
+        {
+            var announcements = await _context.Announcements.FindAsync(id);
+            if (announcements == null) return "Announcements Not Found";
+
+            _context.Announcements.Remove(announcements);
+            await _context.SaveChangesAsync();
+            return null;
+        }
     }
 }

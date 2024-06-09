@@ -12,5 +12,6 @@ namespace RehabilitationSystem.Interfaces
         Task<GetAnnouncement?> GetByIdAsync(string id, List<string> includes);
         Task<string?> AddAsync(AddAnnouncement vm, string AdminId);
         Task<string?> UpdateAsync(string id, UpdateAnnouncement vm);
+        Task<string?> DeleteAsync(string id);
     }
 }

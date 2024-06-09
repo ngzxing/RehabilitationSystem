@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace RehabilitationSystem.Models
 {
     public class ProgramStudent
-    {   
-        
+    {        
         [Key]
         public string? ProgramStudentId { get; set; }
 

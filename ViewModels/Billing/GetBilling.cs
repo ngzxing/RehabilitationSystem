@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using RehabilitationSystem.Models;
 using RehabilitationSystem.ViewModels.BillingItem;
 
-namespace RehabilitationSystem.ViewModels
+namespace RehabilitationSystem.ViewModels.Billing
 {
     public class GetBilling
     {

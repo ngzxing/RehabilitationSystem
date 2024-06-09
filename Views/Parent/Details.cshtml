@@ -1,8 +1,12 @@
-﻿<div class="row">
+﻿@using RehabilitationSystem.ViewModels.Parent;
+
+@model GetParent
+
+<div class="row">
     <div class="col-md-12 stretch-card">
         <div class="card">
             <div class="card-body">
-                <p class="card-title">Parent: parentName</p>
+                <p class="card-title">Parent: @Model.Name</p>
 
                 <div class="row">
                     <div class="col-xl-4">
@@ -24,30 +28,30 @@
                             <div class="card-body">
                                 <div class="card-body">
                                     <h1 class="card-title">Name</h1>
-                                    <p>unknown</p>
+                                    <p>@Model.Name</p>
                                 </div>
                                 <div class="card-body">
                                     <h1 class="card-title">Address</h1>
-                                    <p>unknown</p>
+                                    <p>@Model.Name</p>
                                 </div>
                                 <div class="row ms-0">
                                     <div class="card-body col-1">
                                         <p class="card-title">Email</p>
-                                        <p>unknown</p>
+                                        <p>@Model.AppUser.Email</p>
                                     </div>
                                     <div class="card-body col-1 mt-2">
                                         <p class="card-title">Phone Number</p>
-                                        <p>unknown</p>
+                                        <p>@Model.AppUser.PhoneNumber</p>
                                     </div>
                                 </div>
                                 <div class="row ms-0">
                                     <div class="card-body col-1">
                                         <p class="card-title">No. of registered children</p>
-                                        <p>unknown</p>
+                                        <p>@Model.Students.Count</p>
                                     </div>
                                     <div class="card-body col-1 mt-2">
                                         <p class="card-title">Payment Status</p>
-                                        <p>unknown</p>
+                                        <p>@Model.Name</p>
                                     </div>
                                 </div>
                             </div>
@@ -70,44 +74,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @* @foreach (var obj in Model)
-                                    {
-                                    <tr>
-                                    <td>@obj.Name</td>
-                                    <td>dummydata</td>
-                                    <td>dummydata</td>
-                                    <td>dummydata</td>
-                                    <td>dummydata</td>
-                                    </tr>
-                                    } *@
-                                    <tr>
-                                        <td>dummydata</td>
-                                        <td>dummydata</td>
-                                        <td>dummydata</td>
-                                        <td>dummydata</td>
-                                        <td>
-                                            <a asp-controller="Student" asp-action="Details" class="btn btn-primary col-sm-4 col-md-2 col-lg-4">
-                                                <i class="mdi mdi-table-edit"></i> <p>Edit</p>
-                                            </a>
-                                            <a onclick="" class="btn btn-danger col-sm-4 col-md-2 col-lg-4">
-                                                <i class="mdi mdi-delete-forever"></i> <p>Delete</p>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>dummydata</td>
-                                        <td>dummydata</td>
-                                        <td>dummydata</td>
-                                        <td>dummydata</td>
-                                        <td>
-                                            <a asp-controller="Student" asp-action="Details" class="btn btn-primary col-sm-4 col-md-2 col-lg-4">
-                                                <i class="mdi mdi-table-edit"></i> <p>Edit</p>
-                                            </a>
-                                            <a onclick="" class="btn btn-danger col-sm-4 col-md-2 col-lg-4">
-                                                <i class="mdi mdi-delete-forever"></i> <p>Delete</p>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                     @foreach (var obj in Model.Students)
+                                     {
+                                        <tr>
+                                            <td>
+                                                <a asp-controller="Student" asp-action="Details" asp-route-id="@obj.StudentId">
+                                                    @obj.Name
+                                                </a>
+                                            </td>
+                                            <td>@obj.Age</td>
+                                            <td>@obj.DOB</td>
+                                            <td>@obj.Name</td>
+                                            <td>
+                                                <a asp-controller="" asp-action="" class="btn btn-primary col-sm-4 col-md-2 col-lg-4">
+                                                    <i class="mdi mdi-table-edit"></i> <p>Edit</p>
+                                                </a>
+                                                <a onclick="" class="btn btn-danger col-sm-4 col-md-2 col-lg-4">
+                                                    <i class="mdi mdi-delete-forever"></i> <p>Delete</p>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                     } 
                                 </tbody>
                             </table>
                         </div>

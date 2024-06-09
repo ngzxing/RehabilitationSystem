@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RehabilitationSystem.Models;
 
-namespace RehabilitationSystem.ViewModels
+namespace RehabilitationSystem.ViewModels.Billing
 {
     public class AddBilling
     {

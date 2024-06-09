@@ -14,7 +14,6 @@ namespace RehabilitationSystem.ViewModels.Slot
         [Required]
         public DateTime? EndTime { get; set; }
         [Required]
-        public DateTime? Date { get; set; }
         public string? TherapistSessionId { get; set; }
     }
 }

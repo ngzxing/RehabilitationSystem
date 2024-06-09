@@ -8,6 +8,8 @@ using RehabilitationSystem.ViewModels.Program;
 using RehabilitationSystem.ViewModels.ProgramStudentSlot;
 using RehabilitationSystem.ViewModels.Report;
 using RehabilitationSystem.ViewModels.Student;
+using RehabilitationSystem.ViewModels.Billing;
+
 
 namespace RehabilitationSystem.ViewModels.ProgramStudent
 {

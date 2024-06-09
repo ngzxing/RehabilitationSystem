@@ -1,0 +1,29 @@
+﻿@using RehabilitationSystem.ViewModels.Billing;
+
+@model List<GetBilling>
+
+@foreach (var obj in Model)
+{
+    <tr>
+        <td>@obj.ParentName</td>
+        <td>@obj.StudentName</td>
+        <td>@obj.ProgramName</td>
+        <td>@obj.IssueDate?.ToString("dd/MM/yyyy")</td>
+        <td>
+            @if (@obj.PaymentStatus == false)
+            {
+                <span class="text-red"><b>@obj.TotalPayAmount.ToString()</b></span>
+            }
+            else
+            {
+                <span class="text-green"><b>paid on </b>@obj.IssueDate?.ToString("dd/MM/yyyy")</span>
+            }
+        </td>
+        <td>
+            <a onclick="" class="btn btn-info btn-icon-text">
+                Print receipt
+                <i class="mdi mdi-printer btn-icon-append"></i>
+            </a>
+        </td>
+    </tr>
+}

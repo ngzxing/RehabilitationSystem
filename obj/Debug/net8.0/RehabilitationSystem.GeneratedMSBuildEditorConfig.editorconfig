@@ -17,87 +17,107 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RehabilitationSystem
 build_property.RootNamespace = RehabilitationSystem
-build_property.ProjectDir = C:\Users\User\Desktop\groupProject\RehabilitationSystem2\
+build_property.ProjectDir = C:\Users\USER\Desktop\RehabilitationSystem\RehabilitationSystem\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\User\Desktop\groupProject\RehabilitationSystem2
+build_property.MSBuildProjectDirectory = C:\Users\USER\Desktop\RehabilitationSystem\RehabilitationSystem
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Announcement/Create.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Announcement/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5ub3VuY2VtZW50XENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Announcement/Index.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Announcement/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5ub3VuY2VtZW50XEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Announcement/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5ub3VuY2VtZW50XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Billing/Details.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Billing/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmlsbGluZ1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Billing/Index.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Billing/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmlsbGluZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Home/Dashboard.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Billing/_BillingTableRows.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmlsbGluZ1xfQmlsbGluZ1RhYmxlUm93cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Home/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Home/Index.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Home/Privacy.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Parent/Details.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Parent/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFyZW50XERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Parent/Index.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Parent/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFyZW50XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Program/Create.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Program/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Program/Details.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Program/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Program/Index.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Program/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Program/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Shared/Error.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Session/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Vzc2lvblxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Session/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Vzc2lvblxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Student/Details.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Student/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Student/Index.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Student/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/_ViewImports.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/_ViewStart.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Desktop/groupProject/RehabilitationSystem2/Views/Shared/_Layout.cshtml]
+[C:/Users/USER/Desktop/RehabilitationSystem/RehabilitationSystem/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-cowbzjv9lv

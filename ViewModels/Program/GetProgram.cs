@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using RehabilitationSystem.Models;
 using RehabilitationSystem.ViewModels.Session;
+using RehabilitationSystem.ViewModels.Billing;
+
 
 namespace RehabilitationSystem.ViewModels.Program
 {

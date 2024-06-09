@@ -8,8 +8,7 @@ namespace RehabilitationSystem.ViewModels.TherapistSession
 {
     public class AddTherapistSession
     {
-       
-       
+        
         [Required]
         public string? TherapistId {get; set;}
         [Required]

@@ -21,15 +21,20 @@ namespace RehabilitationSystem.Controllers
         public async Task<IActionResult> Index()
         {
             ProgramQuery query = new ProgramQuery() { };
-            List<string> includes = new List<string>();
+            List<string> includes = new List<string>() { "Sessions" };
             List<GetProgram> ProgramVM = await _programRepo.GetAllAsync(query, includes);
             return View(ProgramVM);
         }
 
         // GET: ProgramController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(string id)
         {
-            return View();
+            GetProgram ProgramVM = await _programRepo.GetByIdAsync(id, new List<string>() { "Sessions" });
+            //Handle null or not found
+            if (ProgramVM == null)
+                return View();
+
+            return View(ProgramVM);
         }
 
         // GET: ProgramController/Create
@@ -45,7 +50,8 @@ namespace RehabilitationSystem.Controllers
         {
             try
             {
-                await _programRepo.AddAsync(program);
+                if (ModelState.IsValid)
+                    await _programRepo.AddAsync(program);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -54,19 +60,34 @@ namespace RehabilitationSystem.Controllers
             }
         }
 
+
         // GET: ProgramController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            GetProgram? getProgram = await _programRepo.GetByIdAsync(id, new List<string>());
+            //Handle null or not found
+            if (getProgram == null) 
+                return View();
+
+            var program = new UpdateProgram
+            {
+                Name = getProgram.Name,
+                Objective = getProgram.Objective,
+                Description = getProgram.Description,
+                Price = getProgram.Price
+            };
+            return View(program);
         }
 
         // POST: ProgramController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(string id, UpdateProgram program)
         {
             try
             {
+                if (ModelState.IsValid)
+                    await _programRepo.UpdateAsync(id, program);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -74,6 +95,22 @@ namespace RehabilitationSystem.Controllers
                 return View();
             }
         }
+
+        /*public IActionResult Upsert(string? id)
+        {
+            if (id == null || id == 0)
+            {
+                //create
+                return View();
+            }
+            else
+            {
+                //update
+                UpsertProgram program = _programRepo.
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id, includeProperties: "ProductImages");
+                return View(productVM);
+            }
+        }*/
 
         // GET: ProgramController/Delete/5
         public ActionResult Delete(int id)
@@ -83,17 +120,29 @@ namespace RehabilitationSystem.Controllers
 
         // POST: ProgramController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        /*[ValidateAntiForgeryToken]*/
+        public async Task<IActionResult> Delete(string id)
         {
             try
             {
+                var result = await _programRepo.DeleteAsync(id);
+                Console.WriteLine(id + "HAHA");
+                if (result == null)
+                {
+                    return Json(new { success = true, message = "Program deleted successfully." });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Error occurred while deleting the program." });
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
-            }
+                return Json(new { success = false, message = ex.Message });
+/*                return View();
+*/          }
         }
+
     }
 }

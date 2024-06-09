@@ -20,7 +20,6 @@ using RehabilitationSystem.ViewModels.Slot;
 using RehabilitationSystem.ViewModels.Student;
 using RehabilitationSystem.ViewModels.Therapist;
 using RehabilitationSystem.ViewModels.TherapistSession;
-using RehabilitationSystem.ViewModels;
 
 public static class MapperExtensions
 {
@@ -422,7 +421,16 @@ public static class MapperExtensions
                             SlotId = t.SlotId,
                             StartTime = t.StartTime,
                             EndTime = t.EndTime,
-                        
+                            TherapistSession = new GetTherapistSession
+                            {
+                                Therapist = new GetTherapist
+                                {
+                                    TherapistId = t.TherapistSession.Therapist!.TherapistId,
+                                    Name = t.TherapistSession.Therapist!.Name,
+
+                                }
+                            }
+
                         }
 
 

@@ -1,8 +1,12 @@
-﻿<div class="row">
+﻿@using RehabilitationSystem.ViewModels.Student;
+
+@model GetStudent
+
+<div class="row">
     <div class="col-md-12 stretch-card">
         <div class="card">
             <div class="card-body">
-                <p class="card-title">Student: studentName</p>
+                <p class="card-title">Student: @Model.Name</p>
 
                 <div class="row">
                     <div class="col-xl-4">
@@ -24,29 +28,29 @@
                             <div class="card-body">
                                 <div class="card-body">
                                     <h1 class="card-title">Name</h1>
-                                    <p>unknown</p>
+                                    <p>@Model.Name</p>
                                 </div>
                                 <div class="card-body">
                                     <h1 class="card-title">Parent Name</h1>
-                                    <p>unknown</p>
+                                    <p>@Model.Parent.Name</p>
                                 </div>
                                 <div class="row ms-0">
                                     <div class="card-body col-1">
-                                        <p class="card-title">Unknown</p>
-                                        <p>unknown</p>
+                                        <p class="card-title">Age</p>
+                                        <p>@Model.Age</p>
                                     </div>
                                     <div class="card-body col-1 mt-2">
-                                        <p class="card-title">Unknown</p>
-                                        <p>unknown</p>
+                                        <p class="card-title">Gender</p>
+                                        <p>@Model.Gender</p>
                                     </div>
                                 </div>
                                 <div class="row ms-0">
                                     <div class="card-body col-1">
-                                        <p class="card-title">Unknown</p>
-                                        <p>unknown</p>
+                                        <p class="card-title">DOB</p>
+                                        <p>@Model.DOB</p>
                                     </div>
                                     <div class="card-body col-1 mt-2">
-                                        <p class="card-title">Unknown</p>
+                                        <p class="card-title">Current Program</p>
                                         <p>unknown</p>
                                     </div>
                                 </div>
@@ -69,37 +73,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @* @foreach (var obj in Model)
-                                        {
+                                    @foreach (var obj in @Model.ProgramStudents)
+                                    {
                                         <tr>
-                                        <td>@obj.Name</td>
-                                        <td>dummydata</td>
-                                        <td>dummydata</td>
-                                        <td>dummydata</td>
+                                            <td>@obj.ProgramId</td>
+                                            <td>dummydata</td>
+                                            <td>@obj.RegisterDate</td>
+                                            <td>
+                                                <a onclick="" class="btn btn-info btn-icon-text">
+                                                    Print skills
+                                                    <i class="mdi mdi-printer btn-icon-append"></i>
+                                                </a>
+                                            </td>
                                         </tr>
-                                        } *@
-                                    <tr>
-                                        <td>dummydata</td>
-                                        <td>dummydata</td>
-                                        <td>dummydata</td>
-                                        <td>
-                                            <a onclick="" class="btn btn-info btn-icon-text">
-                                                Print skills
-                                                <i class="mdi mdi-printer btn-icon-append"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>dummydata</td>
-                                        <td>dummydata</td>
-                                        <td>dummydata</td>
-                                        <td>
-                                            <a onclick="" class="btn btn-info btn-icon-text">
-                                                Print skills
-                                                <i class="mdi mdi-printer btn-icon-append"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    } 
                                 </tbody>
                             </table>
                         </div>

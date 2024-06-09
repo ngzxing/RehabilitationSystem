@@ -18,6 +18,5 @@ namespace RehabilitationSystem.ViewModels.Session
         [Required]
         public string? ProgramId { get; set; }
         
-        
     }
 }
