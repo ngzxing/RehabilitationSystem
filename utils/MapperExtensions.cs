@@ -518,6 +518,8 @@ public static class MapperExtensions
             SlotId = slot.SlotId,
             StartTime = slot.StartTime,
             EndTime = slot.EndTime,
+            ProgramName = slot.TherapistSession.Session.Program.Name,
+            SessionName = slot.TherapistSession.Session.Name,
             TherapistSession = includes.Contains("TherapistSession") ? new GetTherapistSession
             {
                 TherapistSessionId = slot.TherapistSession!.TherapistSessionId,
@@ -615,6 +617,16 @@ public static class MapperExtensions
                 PhoneNumber = t.AppUser!.PhoneNumber,
                 Email = t.AppUser.Email
             } : null,
+            Sessions = includes.Contains("Sessions")
+                ? (ICollection<GetSession>)t.TherapistSessions!.Select(ts => new GetSession
+                {
+
+                    SessionId = ts.Session!.SessionId,
+                    Name = ts.Session.Name,
+                    Description = ts.Session.Description,
+                    Slots = null,
+                    Therapists = null,
+                }) : null,
             Reports = includes.Contains("Reports") 
                 ? (ICollection<GetReport>)t.Reports!.Select(r => new GetReport
                     {

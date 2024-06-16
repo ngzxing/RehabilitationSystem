@@ -1,0 +1,55 @@
+﻿@using RehabilitationSystem.ViewModels.Student;
+
+@model List<GetStudent>
+
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="d-flex justify-content-between flex-wrap">
+            <div class="d-flex align-items-end flex-wrap">
+                <div class="me-md-3 me-xl-5">
+                    <h2>Student Management</h2>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">Parent List</p>
+                <div class="table-responsive">
+                    <table id="order-listing" class="table">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Parent Name</th>
+                                <th>Age</th>
+                                <th>DOB</th>
+                                <th>Program</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in Model)
+                            {
+                            <tr>
+                                <td>
+                                    <a asp-controller="Student" asp-action="Details" asp-route-id="@obj.StudentId">
+                                        @obj.Name
+                                    </a>
+                                </td>
+                                <td>@obj.Parent.Name</td>
+                                <td>@obj.Age</td>
+                                <td>@obj.DOB</td>
+                                <td>@obj.ProgramStudents.OrderByDescending(ps => ps.RegisterDate).FirstOrDefault().Program?.Name</td> 
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

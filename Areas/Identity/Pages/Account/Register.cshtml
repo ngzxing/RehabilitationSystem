@@ -1,0 +1,148 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Create a new account.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Name" class="form-control" autocomplete="name" aria-required="true" placeholder="Your Name" />
+                <label asp-for="Input.Name">User Name</label>
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Password">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select" id="roleSelect">
+                    <option disabled selected>-Select Role-</option>
+                </select>
+            </div>
+
+            <!-- Additional input fields for specific roles -->
+            <div id="additionalFields" style="display: none;">
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Address" class="form-control" autocomplete="address" aria-required="true" placeholder="Your Address" />
+                    <label asp-for="Input.Address">Address</label>
+                    <span asp-validation-for="Input.Address" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.City" class="form-control" autocomplete="city" aria-required="true" placeholder="Your City" />
+                    <label asp-for="Input.City">City</label>
+                    <span asp-validation-for="Input.City" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.State" class="form-control" autocomplete="state" aria-required="true" placeholder="Your State" />
+                    <label asp-for="Input.State">State</label>
+                    <span asp-validation-for="Input.State" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Postcode" class="form-control" autocomplete="postcode" aria-required="true" placeholder="Your Postcode" />
+                    <label asp-for="Input.Postcode">Postcode</label>
+                    <span asp-validation-for="Input.Postcode" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Occupation" class="form-control" autocomplete="occupation" aria-required="true" placeholder="Your Occupation" />
+                    <label asp-for="Input.Occupation">Occupation</label>
+                    <span asp-validation-for="Input.Occupation" class="text-danger"></span>
+                </div>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to register.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                            about setting up this ASP.NET application to support logging in via external services</a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>// Script to show additional input fields based on selected role
+        document.getElementById('roleSelect').addEventListener('change', function () {
+            var selectedRole = this.value;
+            var additionalFields = document.getElementById('additionalFields');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: selectedRole,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            })
+
+            // Show additional fields only when Parent role is selected
+            if (selectedRole === 'Parent') {
+                additionalFields.style.display = 'block';
+            } else {
+                additionalFields.style.display = 'none';
+            }
+        });
+
+        // Function to toggle required attribute for additional fields based on selected role
+        function toggleAdditionalFieldsRequired() {
+            var selectedRole = document.getElementById("roleSelect").value;
+            var additionalFields = document.getElementById("additionalFields").querySelectorAll("input");
+
+            additionalFields.forEach(function (field) {
+                if (selectedRole === "Parent") {
+                    field.setAttribute("required", "required");
+                } else {
+                    field.removeAttribute("required");
+                }
+            });
+        }
+
+        // Event listener to toggle required attribute when role selection changes
+        document.getElementById("roleSelect").addEventListener("change", toggleAdditionalFieldsRequired);
+
+        // Call the function initially to set the required attributes based on the initial role selection
+        toggleAdditionalFieldsRequired();
+    </script>
+}

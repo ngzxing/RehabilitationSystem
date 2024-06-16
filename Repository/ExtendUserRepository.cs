@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using RehabilitationSystem.Data;
 using RehabilitationSystem.Interfaces;
 using RehabilitationSystem.ViewModels.AbstractViewModel;
@@ -41,8 +41,9 @@ namespace RehabilitationSystem.Repository
             }else if(role == "THERAPIST"){
                 
                 Id = await _context.Therapists.Where( a => a.AppUserId == AppUserId).Select(e => e.TherapistId).FirstOrDefaultAsync();
-
-            }else if(role == "PARENT"){
+                
+            }
+            else if(role == "PARENT"){
 
                 Id = await _context.Parents.Where( a => a.AppUserId == AppUserId).Select(e => e.ParentId).FirstOrDefaultAsync();
 

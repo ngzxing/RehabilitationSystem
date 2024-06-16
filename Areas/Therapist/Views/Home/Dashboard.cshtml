@@ -1,0 +1,718 @@
+﻿@{
+    ViewBag.Title = "Calendar";
+}
+
+<div class="row">
+    <div class="col-md-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">Timeline</p>
+                <div class="mb-md-0">
+                    <!-- Filter -->
+                    <div class="d-flex align-items-end flex-wrap">
+                        <div class="d-flex col-xl-2">
+                            <select class="btn form-control form-control-sm" onchange="" id="" style="block-size:5px;">
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="d-flex col-xl-2 ms-3">
+                            <!-- Added ms-3 for margin between selects -->
+                            <select class="btn form-control form-control-sm" onchange="" id="" style="block-size:5px;">
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div id="timelineContainer" class="timeline-container">
+                    <!-- Timeline will be generated here -->
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-title">Calendar</p>
+                <div class="mb-md-0">
+                    <a onclick="openCreateSlotPopup()" class="btn btn-success">
+                        <i class="mdi mdi-plus" style="font-size:15px"></i> &nbsp Create Slot
+                    </a>
+                </div>
+                <div id="calender" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="slotPopUp" class="popup">
+    <div class="popup-content">
+        <span class="popup-close" onclick="closeSlotPopup()">&times;</span>
+        <div class="d-flex">
+            <h2 id="slotPopupTitle"></h2>&nbsp;&nbsp;
+            <div id="deleteSlotButton" class="text-right">
+                <a onclick="DeleteSlot()" class="btn btn-icon">
+                    <i class="mdi mdi-delete-forever" style="color:red; font-size:25px;"></i>
+                </a>
+            </div>
+        </div>
+        <br />
+        <form method="post" class="forms-sample" id="slotForm">
+            <div class="form-group row">
+                <div class="input-group">
+                    <div class="input-group">
+                        <label for="programSelect" onchange="sessionFilter()" class="mt-2" style="width:90px;">Program: </label>
+                        <div class="col">
+                            <div id="programDisplay" class="display-box" style="display:none;">
+                                <!-- Display selected program here -->
+                            </div>
+                            <select id="programSelect" class="form-control mb-2">
+                                <option value="" disabled selected>Please select a program</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <span class="ms-4" style="width:50px"></span>
+                    </div>
+                    <div class="input-group">
+                        <label for="sessionSelect" class="mt-2" style="width:90px;">Session: </label>
+                        <div class="col">
+                            <div id="sessionDisplay" class="display-box" style="display:none;">
+                                <!-- Display selected program here -->
+                            </div>
+                            <select id="sessionSelect" class="form-control mb-2">
+                                <option value="" disabled selected>Please select a session</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <span class="ms-4" style="width:50px"></span>
+                    </div>
+                    <!--<div class="input-group">
+        <label for="therapistSelect" class="mt-2" style="width:90px;">Therapist: </label>
+        <div class="col">
+            <select id="therapistSelect" class="form-control mb-2">-->
+                    <!-- Add more options as needed -->
+                    <!--</select>
+        </div>
+        <span class="ms-4" style="width:50px"></span>
+    </div>-->
+                    <div class="input-group">
+                        <label for="startTime" class="mt-2" style="width:90px;">Start Time: </label>
+                        <div class="col">
+                            <input type="datetime-local" id="startTime" class="form-control mb-2" required>
+                        </div>
+                        <span class="ms-4" style="width:50px"></span>
+                    </div>
+                    <div class="input-group">
+                        <label for="endTime" class="mt-2" style="width:90px;">End Time: </label>
+                        <div class="col">
+                            <input type="datetime-local" id="endTime" class="form-control" required>
+                        </div>
+                        <button type="submit" id="slotPopupButton" class="btn btn-primary ms-2 input-group-append" style="width:68px"></button>
+                    </div>
+                    <input type="text" id="therapistId" value="@ViewData["TherapistId"]" hidden>
+                    <input type="text" id="therapistSessionId" hidden>
+                    <input type="text" id="slotId" hidden>
+                </div>
+            </div>
+        </form>
+        <p id="pDetails" class=""></p>
+        <div class="scrollable-table-container">
+            <table class="table table-hover" id="programStudentSlotTable">
+                <thead>
+                    <tr>
+                        <th>Parent Name</th>
+                        <th>Student Name</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="ProgramStudentSlotTableBody">
+                    @*Slot data will be dynamically inserted here *@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+
+    <script>
+        function showSlotPopup() {
+            const myPopup = document.getElementById('slotPopUp');
+            // Show the popup
+            myPopup.classList.add("show");
+            setTimeout(function () {
+                myPopup.querySelector('.popup-content').classList.add("show");
+            }, 100); // Delay to ensure the popup has shown
+        }
+
+        function closeSlotPopup() {
+            const myPopup = document.getElementById('slotPopUp');
+            myPopup.querySelector('.popup-content').classList.remove('show');
+            setTimeout(function () {
+                myPopup.classList.remove("show");
+            }, 300); // Delay to match the transition duration
+        }
+
+        window.addEventListener('click', function (event) {
+            const myPopup = document.getElementById('slotPopUp');
+            if (event.target == myPopup) {
+                myPopup.querySelector('.popup-content').classList.remove('show');
+                setTimeout(function () {
+                    myPopup.classList.remove("show");
+                }, 300); // Delay to match the transition duration
+            }
+        });
+
+        function openCreateSlotPopup() {
+            // Reset form fields
+            $('#slotForm')[0].reset();
+            $('#therapistSessionId').val('');
+            $('#slotId').val('');
+            $('#sessionSelect').val('');
+
+            // Show Ui change
+            $('#slotPopupTitle').text('Create Slot');
+            $('#slotPopupButton').text('Create');
+
+            // Hide display elements
+            $('#programDisplay').hide();
+            $('#sessionDisplay').hide();
+
+            // Show select elements
+            $('#programSelect').show();
+            $('#sessionSelect').show();
+
+            // Hide unnecessary elements
+            $('#programStudentSlotTable').hide();
+            $('#deleteSlotButton').hide();
+            $('#pDetails').hide();
+
+            // Enable selects if they are disabled
+            $('#programSelect').prop('disabled', false);
+            $('#sessionSelect').prop('disabled', false);
+            $('#therapistSelect').prop('disabled', false);
+
+            // Make selects required field
+            $('#programSelect').prop('required', true);
+            $('#sessionSelect').prop('required', true);
+
+            // Fetch program and populate select list
+            fetch(`/Therapist/Program/GetAll`)
+                .then(response => response.json())
+                .then(programs => {
+                    const programSelect = document.getElementById("programSelect");
+                    programSelect.innerHTML = ""; // Clear existing options
+                    // Add the default disabled option
+                    var defaultOption = document.createElement("option");
+                    defaultOption.value = "";
+                    defaultOption.text = "Please select a program";
+                    defaultOption.disabled = true;
+                    defaultOption.selected = true;
+                    programSelect.appendChild(defaultOption);
+
+                    programs.forEach(program => {
+                        var option = document.createElement("option");
+                        option.value = program.programId;
+                        option.text = program.name;
+                        programSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching sessions:', error);
+                });
+
+            const sessionSelect = document.getElementById("sessionSelect");
+            sessionSelect.innerHTML = ""; // Clear existing options
+
+            // Show the popup
+            showSlotPopup();
+        }
+
+        // Function to handle session filtering based on selected program
+        function sessionFilter() {
+            var selectedProgram = $('#programSelect').val();
+
+            // Fetch sessions filtered by selected program
+            fetch(`/Therapist/Program/GetSessionsByProgramId?programId=${selectedProgram}`)
+                .then(response => response.json())
+                .then(sessions => {
+                    const sessionSelect = document.getElementById("sessionSelect");
+                    sessionSelect.innerHTML = ""; // Clear existing options
+
+                    // Add the default disabled option
+                    var defaultOption = document.createElement("option");
+                    defaultOption.value = "";
+                    defaultOption.text = "Please select a session";
+                    defaultOption.disabled = true;
+                    defaultOption.selected = true;
+                    sessionSelect.appendChild(defaultOption);
+
+                    sessions.forEach(session => {
+                        var option = document.createElement("option");
+                        option.value = session.sessionId;
+                        option.text = session.name;
+                        sessionSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching sessions:', error);
+                });
+        }
+
+        $(document).ready(function () {
+            var events = [];
+            $.ajax({
+                type: "GET",
+                url: "/Therapist/Home/GetEvents",
+                success: function (data) {
+                    $.each(data, function (i, v) {
+                        events.push({
+                            slotId: v.slotId,
+                            sessionId: v.therapistSession.sessionId,
+                            therapistId: v.therapistSession.therapistId,
+                            therapistSessionId: v.therapistSession.therapistSessionId,
+                            programName: v.programName,
+                            sessionName: v.sessionName,
+                            start: moment(v.startTime).format('YYYY-MM-DDTHH:mm:ss'),
+                            end: moment(v.endTime).format('YYYY-MM-DDTHH:mm:ss'),
+                            color: 'green',
+                        });
+                    });
+
+                    // Sort events by start time
+                    events.sort(function (a, b) {
+                        return moment(a.start).valueOf() - moment(b.start).valueOf();
+                    });
+
+                    GenerateCalender(events);
+                    GenerateTimeline(events);
+                },
+                error: function (error) {
+                    alert('failed');
+                }
+            })
+
+@*            // Fetch therapists and populate select list
+            fetch(`/Admin/Therapist/GetTherapists`)
+                .then(response => response.json())
+                .then(therapists => {
+                    const therapistSelect = document.getElementById("therapistSelect");
+                    therapistSelect.innerHTML = ""; // Clear existing options
+                    therapists.forEach(therapist => {
+                        var option = document.createElement("option");
+                        option.value = therapist.therapistId;
+                        option.text = therapist.name;
+                        therapistSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching therapists:', error);
+                });*@
+
+
+            $('#programSelect').change(function () {
+                sessionFilter(); // Trigger session filtering when programSelect changes
+            });
+
+            function GenerateCalender(events) {
+                $('#calender').fullCalendar('destroy');
+                $('#calender').fullCalendar({
+                    contentHeight: 600,
+                    defaultDate: new Date(),
+                    timeFormat: 'h(:mm)a',
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,basicWeek,basicDay,agenda'
+                    },
+                    eventLimit: true,
+                    eventColor: '#378006',
+                    events: events,
+                    eventClick: function (calEvent, jsEvent, view) {
+                        // Show Ui change
+                        $('#slotPopupTitle').text('Edit Slot');
+                        $('#slotPopupButton').text('Edit');
+
+                        // Show display elements
+                        $('#programDisplay').show().text(calEvent.programName);
+                        $('#sessionDisplay').show().text(calEvent.sessionName);
+
+                        // Hide select elements
+                        $('#programSelect').hide();
+                        $('#sessionSelect').hide();
+
+                        // Make selects not required field
+                        $('#programSelect').prop('required', false);
+                        $('#sessionSelect').prop('required', false);
+
+@*                        // Set selected therapist
+                        therapistSelect.value = calEvent.therapistId;
+                        therapistSelect.disabled = true;*@
+
+                        // Display event details in the popup
+                        var $description = $('<div/>');
+                        $description.append($('<p/>').html('Status: booked'));
+                        $('#pDetails').empty().html($description);
+
+                        $('#startTime').val(calEvent.start.toISOString().slice(0, 16));
+                        $('#endTime').val(calEvent.end.toISOString().slice(0, 16));
+                        $('#therapistSessionId').val(calEvent.therapistSessionId);
+                        $('#slotId').val(calEvent.slotId);
+
+                        // Populate the table (example data)
+                        var tableBody = $('#ProgramStudentSlotTableBody');
+                        tableBody.empty();
+                        tableBody.append('<tr><td>Parent 1</td><td>Student 1</td><td>123-456-7890</td><td><button class="btn btn-primary">Action</button></td></tr>');
+
+                        // Show the table and delete button
+                        $('#programStudentSlotTable').show();
+                        $('#deleteSlotButton').show();
+                        $('#pDetails').show();
+                        // Show the popup
+                        showSlotPopup();
+                    }
+                })
+            }
+
+            $('#slotForm').submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Get the slot ID from the hidden input field
+                var slotId = $('#slotId').val();
+
+                if (slotId) {
+                    // Gather form data
+                    var formData = {
+                        startTime: $('#startTime').val(),
+                        endTime: $('#endTime').val(),
+                        therapistSessionId: $('#therapistSessionId').val(), // Assuming therapistSession ID is selected here
+                    };
+
+                    // Update slot
+                    $.ajax({
+                        type: "PUT",
+                        url: `/Admin/Slot/UpdateSlot/${slotId}`, // Assuming your route is configured to accept sessionId as part of the URL
+                        data: JSON.stringify(formData),
+                        contentType: "application/json",
+                        dataType: "json",
+                        success: function (response) {
+                            // Handle success response
+                            alert(response.message); // Display success message
+                            // You may want to refresh the calendar or update the specific event
+                            // For simplicity, let's reload the calendar after successful update
+                            location.reload(); // Reload the page (you might want to use a more sophisticated method to update only the necessary parts)
+                        },
+                        error: function (error) {
+                            // Handle error response
+                            alert('Error updating slot: ' + error.responseJSON.message);
+                        }
+                    });
+                } else {
+                    // Gather form data
+                    var formData = {
+                        sessionId: $('#sessionSelect').val(),
+                        therapistId: $('#therapistId').val(),
+                        startTime: $('#startTime').val(),
+                        endTime: $('#endTime').val(),
+                    };
+
+                    // Create new slot
+                    $.ajax({
+                        type: "POST",
+                        url: "/Admin/Slot/AddSlot", // Assuming your route for creating a new slot
+                        data: JSON.stringify(formData),
+                        contentType: "application/json",
+                        dataType: "json",
+                        success: function (response) {
+                            // Handle success response
+                            alert(response.message); // Display success message
+                            // Refresh the calendar after successful creation
+                            location.reload(); // Reload the page (you might want to use a more sophisticated method to update only the necessary parts)
+                        },
+                        error: function (error) {
+                            // Handle error response
+                            alert('Error creating slot: ' + error.responseJSON.message);
+                        }
+                    });
+                }
+            });
+        })
+
+        function GenerateTimeline(events) {
+            var timelineContainer = $('#timelineContainer');
+            timelineContainer.empty(); // Clear any existing content
+
+            events.forEach(function (event) {
+                var start = moment(event.start);
+                var end = moment(event.end);
+                var duration = moment.duration(end.diff(start));
+                var hours = Math.floor(duration.asHours());
+                var minutes = duration.minutes();
+
+                var timelineItem = `
+            <div class="timeline-item p-3">
+                <h6>${start.format('dddd, D MMMM YYYY')}</h6>
+                <div class="d-flex align-items-center">
+                    <p class="mb-1 me-3">${start.format('HH:mm')}</p>
+                    <div class="logo-container me-3">
+                        <img src="/images/clock-small-icon.png" alt="Logo" style="width: 35px; height: 35px;">
+                    </div>
+                    <div>
+                        <p class="mb-1"><strong>Title:</strong><span class="clickable-title" data-slot-id="${event.slotId}" data-therapist-session-id="${event.therapistSessionId}"> ${event.sessionName} (${event.programName})</span> </p>
+                        <p class="mb-0"><strong>Duration:</strong> ${hours} hours ${minutes} minutes</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+                var $timelineItem = $(timelineItem);
+                // Store event data in the element for easy access
+                $timelineItem.data('event', event);
+                timelineContainer.append($timelineItem);
+            });
+
+            // Add click event listener to clickable titles within timeline items
+            timelineContainer.on('click', '.clickable-title', function () {
+                var slotId = $(this).data('slot-id');
+                var therapistSessionId = $(this).data('therapist-session-id');
+
+                // Populate the edit slot popup
+                $('#slotPopupTitle').text('Edit Slot');
+                $('#slotPopupButton').text('Edit');
+
+                // Populate other fields as needed
+                // For simplicity, let's assume you have the necessary data in events array
+
+                var selectedEvent = events.find(function (event) {
+                    return event.slotId == slotId && event.therapistSessionId == therapistSessionId;
+                });
+
+                if (selectedEvent) {
+                    // Show display elements
+                    $('#programDisplay').show().text(selectedEvent.programName);
+                    $('#sessionDisplay').show().text(selectedEvent.sessionName);
+
+                    // Hide select elements
+                    $('#programSelect').hide();
+                    $('#sessionSelect').hide();
+
+                    // Set selected therapist
+@*                    $('#therapistSelect').val(selectedEvent.therapistId).prop('disabled', true);
+*@
+                    // Display event details in the popup
+                    var $description = $('<div/>');
+                    $description.append($('<p/>').html('Status: booked'));
+                    $('#pDetails').empty().html($description);
+
+                    $('#startTime').val(moment(selectedEvent.start).format('YYYY-MM-DDTHH:mm'));
+                    $('#endTime').val(moment(selectedEvent.end).format('YYYY-MM-DDTHH:mm'));
+                    $('#therapistSessionId').val(selectedEvent.therapistSessionId);
+                    $('#slotId').val(selectedEvent.slotId);
+
+                    // Populate the table (example data)
+                    var tableBody = $('#ProgramStudentSlotTableBody');
+                    tableBody.empty();
+                    tableBody.append('<tr><td>Parent 1</td><td>Student 1</td><td>123-456-7890</td><td><button class="btn btn-primary">Action</button></td></tr>');
+
+                    // Show the table and delete button
+                    $('#programStudentSlotTable').show();
+                    $('#deleteSlotButton').show();
+                    $('#pDetails').show();
+
+                    // Show the popup
+                    showSlotPopup();
+                }
+            });
+        }
+
+        document.getElementById('startTime').addEventListener('input', function () {
+            const startTime = new Date(this.value);
+            if (isNaN(startTime.getTime())) return;
+
+            startTime.setHours(startTime.getHours() + 9);
+            const endTime = new Date(startTime);
+            document.getElementById('endTime').value = startTime.toISOString().slice(0, 16);
+        });
+
+        function DeleteSlot() {
+            const slotId = $('#slotId').val();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/Admin/Slot/Delete', // URL of the delete action
+                        data: { id: slotId },
+                        dataType: "json",
+                    @* contentType: "application/json; charset=utf-8",*@
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your slot has been deleted.',
+                                'success'
+                            ).then(() => {
+                                location.reload(); // Refresh the page after confirmation dialog is closed
+                        });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                response.message,
+                                'error'
+                            );
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire(
+                            'Error!',
+                            'An error occurred while deleting the slot.' + xhr + status + error,
+                            'error'
+                        );
+                    }
+                });
+        }
+        })
+    }
+    </script>
+    <style>
+        .popup {
+            position: fixed;
+            z-index: 5;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .popup-content {
+            position: relative;
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888888;
+            width: 50%;
+            font-weight: bolder;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+            transform: scale(0.8);
+            opacity: 0;
+        }
+
+            .popup-content.show {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            .popup-content button {
+                display: block;
+                margin: 0 auto;
+            }
+
+        .show {
+            display: block;
+            opacity: 1;
+        }
+
+        .popup-close {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            color: black;
+            cursor: pointer;
+        }
+
+            .popup-close:hover,
+            .popup-close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .scrollable-table-container {
+            max-height: 300px; /* Adjust this height as needed */
+            overflow-y: auto;
+        }
+
+        #timelineContainer {
+            padding: 0px;
+        }
+
+        .timeline-container {
+            max-height: 600px; /* Set the desired maximum height */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 20px;
+        }
+
+        .timeline-item {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+
+            .timeline-item h6 {
+                margin: 0;
+                font-size: 16px;
+                color: #333;
+            }
+
+            .timeline-item p {
+                margin: 5px 0;
+                font-size: 14px;
+                color: #555;
+            }
+
+                .timeline-item p.mb-1 {
+                    margin-bottom: 5px;
+                }
+
+                .timeline-item p.mb-0 {
+                    margin-bottom: 0;
+                }
+
+            .timeline-item strong {
+                font-weight: bold;
+            }
+
+        .display-box {
+            padding: 8px 12px;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #495057;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .timeline-item .clickable-title {
+            cursor: pointer;
+            color: initial; /* Reset color to inherit from parent */
+        }
+
+            .timeline-item .clickable-title:hover {
+                color: blue;
+            }
+    </style>
+}

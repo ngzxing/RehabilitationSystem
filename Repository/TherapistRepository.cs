@@ -38,7 +38,7 @@ namespace RehabilitationSystem.Repository
         public async Task<GetTherapist?> GetByIdAsync(string id, List<string> includes)
         {
             var therapists = _context.Therapists.AsQueryable();
-
+            Console.WriteLine("MASUK");
 
             return await therapists.Where(t => t.TherapistId == id).ToViewModel(includes).FirstOrDefaultAsync();
         }

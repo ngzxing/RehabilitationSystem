@@ -20,7 +20,7 @@ namespace RehabilitationSystem.Extensions
     public static class UserManagerExtensions
     {   
        
-        public static async Task<(string?, string?)> CreateAsync(this UserManager<AppUser> userManager, IExtendUserRepository extendUserRepo ,AbstractAddUserViewModel vm)
+        public static async Task<(AppUser?, string?, IdentityResult)> CreateAsync(this UserManager<AppUser> userManager, IExtendUserRepository extendUserRepo ,AbstractAddUserViewModel vm)
         {
             var user = new AppUser
             {
@@ -31,39 +31,21 @@ namespace RehabilitationSystem.Extensions
 
             var result = await userManager.CreateAsync(user, vm.AppUser!.Password!);
             if(!result.Succeeded) 
-                return  (null, string.Join(", ", result.Errors.Select(e => e.Description)));
+                return  (null, string.Join(", ", result.Errors.Select(e => e.Description)), result);
 
             var err_msg = await extendUserRepo.AddAsync(user.Id, vm);
             if(err_msg == null)
-                return (user.Id, null);
+                return (user, null, result);
             
-            return (null, err_msg);
+            return (null, err_msg, result);
         }
-        public static async Task<string?> CreateAsync(this UserManager<AppUser> userManager,  ParentRepository repo, AddParent addParent)
-        {
-            var user = new AppUser
-            {
-                UserName = addParent.AppUser!.Email,
-                Email = addParent.AppUser!.Email,
-                PhoneNumber = addParent.AppUser!.PhoneNumber
-            };
-
-            var result = await userManager.CreateAsync(user, addParent.AppUser!.Password!);
-            if(!result.Succeeded) 
-                return  string.Join(", ", result.Errors.Select(e => e.Description));
-
-            var err_msg = await repo.AddAsync(addParent, user.Id);
-            if(err_msg != null)
-                return err_msg;
-            
-            addParent.AppUserId = user.Id;
-            return null;
-        }
+  
 
         public static async Task<(UserId?, string?)> GetCurrentUserId(this ClaimsPrincipal user, IExtendUserRepository extendUser){
 
             var appUserId = user.FindFirstValue(ClaimTypes.NameIdentifier);
             var role = user.FindFirstValue(ClaimTypes.Role);
+            
             var ( extendUserId, err_msg ) = await extendUser.GetIdByAppUserId(appUserId!, role!);
 
             if(err_msg != null)

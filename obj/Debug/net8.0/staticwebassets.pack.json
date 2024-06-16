@@ -117,6 +117,10 @@
       "PackagePath": "staticwebassets\\images\\auth\\register-bg.jpg"
     },
     {
+      "Id": "C:\\Users\\USER\\Desktop\\RehabilitationSystem\\RehabilitationSystem\\wwwroot\\images\\clock-small-icon.png",
+      "PackagePath": "staticwebassets\\images\\clock-small-icon.png"
+    },
+    {
       "Id": "C:\\Users\\USER\\Desktop\\RehabilitationSystem\\RehabilitationSystem\\wwwroot\\images\\faces\\face1.jpg",
       "PackagePath": "staticwebassets\\images\\faces\\face1.jpg"
     },

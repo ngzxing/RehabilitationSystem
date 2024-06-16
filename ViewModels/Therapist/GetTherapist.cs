@@ -16,7 +16,6 @@ namespace RehabilitationSystem.ViewModels.Therapist
         [Required]
         public string? Name { get; set; }
         public GetAppUser? AppUser {get; set;}
-
         public ICollection<GetSession>? Sessions { get; set; }
         public ICollection<GetReport>? Reports { get; set; }
     }

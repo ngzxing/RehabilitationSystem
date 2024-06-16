@@ -1,0 +1,175 @@
+﻿@using System;
+@using RehabilitationSystem.ViewModels.Billing;
+
+@model List<GetBilling>
+
+<style>
+    .text-red {
+        color: red;
+    }
+
+    .text-green {
+        color: green;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="d-flex justify-content-between flex-wrap">
+            <div class="d-flex align-items-end flex-wrap">
+                <div class="me-md-3 me-xl-5">
+                    <h2>Billing Management</h2>
+                    <br />
+                    <div class="mb-md-0">
+                        <a asp-controller="" asp-action="" class="btn btn-success">
+                            <i class="mdi mdi-plus" style="font-size:15px"></i> &nbsp Add Billing
+                        </a>
+                        <a asp-controller="" asp-action="" class="btn btn-info btn-lg">
+                            Post Bill
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">Parent List</p>
+
+                <div class="d-flex align-items-end flex-wrap">
+                    <div class="me-md-3 me-xl-3">
+                        <p class="mb-md-0">Paid/Unpaid Filter:</p>
+                    </div>
+                    <div class="d-flex col-xl-2">
+                        <select class="btn form-control form-control-sm" onchange="paymentStatusFilter()" id="paymentStatusFilter" style="block-size:5px;">
+                            <option value="all">All</option>
+                            <option value="paid">Paid</option>
+                            <option value="unpaid">Unpaid</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+
+                <div class="table-responsive">
+                    <table id="order-listing" class="table">
+                        <thead>
+                            <tr>
+                                <th>Parent Name</th>
+                                <th>Child Name</th>
+                                <th>Program</th>
+                                <th>Issue Date</th>
+                                <th>Payment Status</th>
+                                <th>Receipt</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in Model)
+                            {
+                            <tr>
+                                <td>@obj.ParentName</td>
+                                <td>@obj.StudentName</td>
+                                <td>@obj.ProgramName</td>
+                                <td>@obj.IssueDate?.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    @if (@obj.PaymentStatus == false)
+                                    {
+                                        <span class="text-red"><b>@obj.TotalPayAmount.ToString()</b></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-green"><b>paid on </b>@obj.IssueDate?.ToString("dd/MM/yyyy")</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a onclick="" class="btn btn-info btn-icon-text">
+                                        Print receipt
+                                        <i class="mdi mdi-printer btn-icon-append"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a asp-controller="" asp-action="" asp-route-id="@obj.BillingId" class="btn btn-datatable btn-icon mt-1">
+                                        <i class="mdi mdi-border-color" style="color:blue; font-size:25px;"></i>
+                                    </a>
+                                    <a onclick="Delete('@obj.BillingId')" class="btn btn-datatable btn-icon">
+                                        <i class="mdi mdi-delete-forever" style="color:red; font-size:25px;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function paymentStatusFilter() {
+        var selectedStatus = document.getElementById('paymentStatusFilter').value;
+        const table = document.getElementById('order-listing'); // Target specific table
+
+        function getPaymentStatus(row) {
+            const paymentStatusCell = row.querySelector('td:nth-child(5)'); // Assuming payment status is in the fifth column (adjust index if needed)
+            
+            if (paymentStatusCell) { // Check if cell exists
+                return paymentStatusCell.textContent.trim();
+            } else {
+                return ""; // Handle missing cell (optional)
+            }
+        }
+
+        function filterRows(rows) {
+            if (selectedStatus === 'all') {
+                rows.forEach(row => {
+                    row.style.display = '';
+                });
+                return;
+            }
+
+
+            rows.forEach(row => {
+                const paymentStatus = getPaymentStatus(row);
+                            
+                var hasPaid = paymentStatus.includes("paid") ? "paid" : "unpaid";
+                var equal = selectedStatus === hasPaid ? "equal" : "not";
+                
+                if (selectedStatus === hasPaid) { // Filter based on selected value
+                    row.style.display = ''; // Show the row if it matches the filter
+                } else {
+                    row.style.display = 'none'; // Hide the row if it doesn't match
+                }
+            });
+        }
+
+        const tableBody = table.querySelector('tbody'); // Get the table body
+        const rows = tableBody.querySelectorAll('tr'); // Get all rows in the table body
+        filterRows(rows);
+    }
+</script>
+
+
+@* $.ajax({
+type: "GET",
+url: 'Billing/FilterBilling', // Change to your controller and action
+data: { paymentStatus: selectedStatus },
+success: function (response) {
+    // Assuming response contains the filtered HTML
+    $('tbody').html(response);
+},
+error: function (xhr, status, error) {
+    console.log(xhr);
+    console.log(status);
+    console.log(error);
+    Swal.fire(
+        'Error!',
+        'An error occurred while filtering the billing records.',
+        'error'
+    );
+}
+}); *@

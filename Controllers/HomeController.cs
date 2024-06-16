@@ -1,6 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using RehabilitationSystem.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace RehabilitationSystem.Controllers
 {
@@ -15,6 +20,20 @@ namespace RehabilitationSystem.Controllers
 
 		public IActionResult Index()
 		{
+			var userName = User.Identity.Name; // Get the user's username
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
+            var userRoles = User.FindAll(ClaimTypes.Role).Select(r => r.Value); // Get the user's roles
+
+            ViewBag.UserName = userName;
+            ViewBag.UserId = userId;
+            ViewBag.UserRoles = userRoles;
+
+            Console.WriteLine("Start");
+			Console.WriteLine(userName);
+            Console.WriteLine(userId);
+			Console.WriteLine(userRoles);
+			Console.WriteLine("End");
+
 			return View();
 		}
 
